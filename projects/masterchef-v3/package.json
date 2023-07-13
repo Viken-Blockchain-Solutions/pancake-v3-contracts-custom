@@ -21,7 +21,8 @@
     "format:check": "prettier --check './**/*.{js,ts,sol}'",
     "format:write": "prettier --write './**/*.{js,ts,sol}'",
     "test": "npx hardhat test --show-stack-traces",
-    "compile": "npx hardhat compile --show-stack-traces"
+    "compile": "npx hardhat compile --show-stack-traces",
+    "deploy": "hardhat run scripts/deploy2.ts --network"
   },
   "devDependencies": {
     "@chainlink/contracts": "^0.6.1",

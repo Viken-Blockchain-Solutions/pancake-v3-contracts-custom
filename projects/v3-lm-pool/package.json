@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "compile": "hardhat compile",
-    "test": "echo 'skip'"
+    "test": "echo 'skip'",
+    "deploy": "hardhat run scripts/deploy2.ts --network"
   },
   "devDependencies": {
     "@ethersproject/abi": "^5.4.7",

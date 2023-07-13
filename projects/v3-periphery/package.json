@@ -66,6 +66,7 @@
   },
   "scripts": {
     "compile": "hardhat compile",
-    "test": "hardhat test"
+    "test": "hardhat test",
+    "deploy": "hardhat run scripts/deploy2.ts --network"
   }
 }
