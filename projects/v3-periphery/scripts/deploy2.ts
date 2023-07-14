@@ -161,8 +161,8 @@ async function main() {
     owner
   )
 
-  const VoltageInterfaceMulticall = await VoltageInterfaceMulticall.deploy()
-  console.log('VoltageInterfaceMulticall', VoltageInterfaceMulticall.address)
+  const voltageInterfaceMulticall = await VoltageInterfaceMulticall.deploy()
+  console.log('VoltageInterfaceMulticall', voltageInterfaceMulticall.address)
 
   // await tryVerify(VoltageInterfaceMulticall)
 
@@ -203,7 +203,7 @@ async function main() {
     // NFTDescriptorEx: nftDescriptorEx.address,
     NonfungibleTokenPositionDescriptor: nonfungibleTokenPositionDescriptor.address,
     NonfungiblePositionManager: nonfungiblePositionManager.address,
-    VoltageInterfaceMulticall: VoltageInterfaceMulticall.address,
+    VoltageInterfaceMulticall: voltageInterfaceMulticall.address,
   }
 
   fs.writeFileSync(`./deployments/${networkName}.json`, JSON.stringify(contracts, null, 2))

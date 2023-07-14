@@ -11,8 +11,8 @@ async function main() {
     throw new Error(`No config found for network ${networkName}`)
   }
 
-  const v3DeployedContracts = await import(`../v3-core/deployments/${networkName}.json`)
-  const v3PeripheryDeployedContracts = await import(`../v3-periphery/deployments/${networkName}.json`)
+  const v3DeployedContracts = await import(`../../v3-core/deployments/${networkName}.json`)
+  const v3PeripheryDeployedContracts = await import(`../../v3-periphery/deployments/${networkName}.json`)
 
   const voltageV3PoolDeployer_address = v3DeployedContracts.VoltageV3PoolDeployer
   const voltageV3Factory_address = v3DeployedContracts.VoltageV3Factory
