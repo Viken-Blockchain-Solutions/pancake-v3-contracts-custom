@@ -156,7 +156,7 @@ library SmartRouterHelper {
 
     /************************************************** V3 **************************************************/
 
-    bytes32 internal constant V3_INIT_CODE_HASH = 0x6ce8eb472fa82df5469c6ab6d485f17c3ad13c8cd7af59b3d4a8026c5ce0f7e2;
+    bytes32 internal constant V3_INIT_CODE_HASH =  0x2e10eed13364ea5cf1ace249ba08fdd292fc51ecb16739f3f1993c7fa8244331; // 0x6ce8eb472fa82df5469c6ab6d485f17c3ad13c8cd7af59b3d4a8026c5ce0f7e2;
 
     /// @notice The identifying key of the pool
     struct PoolKey {

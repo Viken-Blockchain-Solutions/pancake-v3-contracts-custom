@@ -1,6 +1,6 @@
 import { HardhatUserConfig } from 'hardhat/config'
-import '@nomicfoundation/hardhat-toolbox';
-import "@nomicfoundation/hardhat-chai-matchers";
+import '@nomicfoundation/hardhat-toolbox'
+import '@typechain/hardhat'
 import 'dotenv/config'
 import { NetworkUserConfig } from 'hardhat/types'
 import 'solidity-docgen';
@@ -47,7 +47,9 @@ const config: HardhatUserConfig = {
     version: '0.7.6',
   },
   networks: {
-    hardhat: {},
+    hardhat: {
+      allowUnlimitedContractSize: true,
+    },
     ...(process.env.KEY_TESTNET && { bscTestnet }),
     ...(process.env.KEY_MAINNET && { bscMainnet }),
     ...(process.env.KEY_GOERLI && { goerli }),
@@ -65,6 +67,7 @@ const config: HardhatUserConfig = {
       {
         network: "fuse",
         chainId: 122,
+        allowUnlimitedContractSize: true,
         urls: {
           apiURL: "https://explorer.fuse.io/api",
           browserURL: "https://explorer.fuse.io"
@@ -73,6 +76,7 @@ const config: HardhatUserConfig = {
       {
         network: "spark",
         chainId: 123,
+        allowUnlimitedContractSize: true,
         urls: {
           apiURL: "https://explorer.fusespark.io/api",
           browserURL: "https://explorer.fusespark.io"

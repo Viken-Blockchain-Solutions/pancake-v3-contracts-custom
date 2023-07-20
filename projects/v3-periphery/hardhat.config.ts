@@ -1,10 +1,14 @@
 import type { HardhatUserConfig, NetworkUserConfig } from 'hardhat/types'
-import "@nomicfoundation/hardhat-toolbox";
+import '@nomiclabs/hardhat-ethers'
+import '@nomiclabs/hardhat-etherscan'
+import '@nomiclabs/hardhat-waffle'
 import '@openzeppelin/hardhat-upgrades'
+import '@typechain/hardhat'
 import 'hardhat-watcher'
 import 'dotenv/config'
 import 'solidity-docgen'
 require('dotenv').config({ path: require('find-config')('.env') })
+
 
 const LOW_OPTIMIZER_COMPILER_SETTINGS = {
   version: '0.7.6',
@@ -107,6 +111,7 @@ export default {
       {
         network: "fuse",
         chainId: 122,
+        allowUnlimitedContractSize: true,
         urls: {
           apiURL: "https://explorer.fuse.io/api",
           browserURL: "https://explorer.fuse.io"
@@ -115,6 +120,7 @@ export default {
       {
         network: "spark",
         chainId: 123,
+        allowUnlimitedContractSize: true,
         urls: {
           apiURL: "https://explorer.fusespark.io/api",
           browserURL: "https://explorer.fusespark.io"

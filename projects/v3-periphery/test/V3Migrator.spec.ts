@@ -30,7 +30,7 @@ describe('V3Migrator', () => {
     weth9: IWETH9
     nft: MockTimeNonfungiblePositionManager
     migrator: V3Migrator
-    deployer: Contract
+    //deployer: Contract
   }> = async (wallets, provider) => {
     const { factory, tokens, nft, weth9, deployer } = await completeFixture(wallets, provider)
 

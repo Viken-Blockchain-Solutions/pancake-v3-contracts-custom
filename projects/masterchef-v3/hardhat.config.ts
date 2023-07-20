@@ -1,15 +1,17 @@
+/* eslint-disable global-require */
 /* eslint-disable @typescript-eslint/no-var-requires */
-
 import type { HardhatUserConfig, NetworkUserConfig } from "hardhat/types";
-import "@nomicfoundation/hardhat-toolbox";
-import "@nomicfoundation/hardhat-chai-matchers";
+import "@nomiclabs/hardhat-ethers";
+import "@nomiclabs/hardhat-etherscan";
+import "@nomiclabs/hardhat-waffle";
 import "@openzeppelin/hardhat-upgrades";
+import "@typechain/hardhat";
 import "hardhat-abi-exporter";
 import "hardhat-contract-sizer";
+import "solidity-coverage";
 import "solidity-docgen";
 import "dotenv/config";
 
-// eslint-disable-next-line global-require
 require("dotenv").config({ path: require("find-config")(".env") });
 
 const bscTestnet: NetworkUserConfig = {
@@ -51,7 +53,9 @@ const fuse: NetworkUserConfig = {
 const config = {
   defaultNetwork: "hardhat",
   networks: {
-    hardhat: {},
+    hardhat: {
+      allowUnlimitedContractSize: true,
+    },
     ...(process.env.KEY_TESTNET && { bscTestnet }),
     ...(process.env.KEY_MAINNET && { bscMainnet }),
     ...(process.env.KEY_GOERLI && { goerli }),

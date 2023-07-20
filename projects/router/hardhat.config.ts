@@ -1,14 +1,15 @@
 import type { HardhatUserConfig, NetworkUserConfig } from 'hardhat/types'
+import '@nomiclabs/hardhat-ethers'
 import '@nomiclabs/hardhat-web3'
 import '@nomiclabs/hardhat-truffle5'
-import "@nomicfoundation/hardhat-toolbox";
-import "@nomicfoundation/hardhat-chai-matchers";
 import 'hardhat-abi-exporter'
 import 'hardhat-contract-sizer'
 import 'dotenv/config'
 import 'hardhat-tracer'
+import '@nomiclabs/hardhat-etherscan'
 import 'solidity-docgen'
 require('dotenv').config({ path: require('find-config')('.env') })
+
 
 // const bscTestnet: NetworkUserConfig = {
 //   url: 'https://rpc.ankr.com/bsc_testnet_chapel',
@@ -68,6 +69,7 @@ const config: HardhatUserConfig = {
   defaultNetwork: 'hardhat',
   networks: {
     hardhat: {
+      allowUnlimitedContractSize: true,
       forking: {
         url: bscTestnet.url || '',
       },

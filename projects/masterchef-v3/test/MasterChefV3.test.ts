@@ -1,3 +1,4 @@
+
 /* eslint-disable func-names */
 import { assert } from "chai";
 import { ethers, upgrades } from "hardhat";
@@ -52,14 +53,14 @@ describe("MasterChefV3", function () {
     );
 
     // Deploy NFT position descriptor
-    // const NonfungibleTokenPositionDescriptor = await ethers.getContractFactoryFromArtifact(
-    //   NftDescriptorOffchainArtifact
-    // );
-    // const baseTokenUri = "https://nft.voltageswap.com/v3/";
-    // const nonfungibleTokenPositionDescriptor = await upgrades.deployProxy(NonfungibleTokenPositionDescriptor, [
-    //   baseTokenUri,
-    // ]);
-    // await nonfungibleTokenPositionDescriptor.deployed();
+   /*  const NonfungibleTokenPositionDescriptor = await ethers.getContractFactoryFromArtifact(
+      NftDescriptorOffchainArtifact
+    );
+    const baseTokenUri = "https://nft.voltageswap.com/v3/";
+    const nonfungibleTokenPositionDescriptor = await upgrades.deployProxy(NonfungibleTokenPositionDescriptor, [
+      baseTokenUri,
+    ]);
+    await nonfungibleTokenPositionDescriptor.deployed(); */
     // TODO:
     await VoltageV3SwapRouter.deploy(voltageV3PoolDeployer.address, voltageV3Factory.address, WETH9Address);
 
@@ -69,7 +70,7 @@ describe("MasterChefV3", function () {
       voltageV3PoolDeployer.address,
       voltageV3Factory.address,
       WETH9Address,
-      // nonfungibleTokenPositionDescriptor.address
+      // nonfungibleTokenPositionDescriptor.address,
       ethers.constants.AddressZero
     );
 
@@ -133,7 +134,7 @@ describe("MasterChefV3", function () {
     const VoltageV3LmPoolDeployer = await ethers.getContractFactoryFromArtifact(VoltageV3LmPoolDeployerArtifact);
     const voltageV3LmPoolDeployer = await VoltageV3LmPoolDeployer.deploy(
       masterChefV3.address
-      // voltageV3FactoryOwner.address
+     // voltageV3FactoryOwner.address
     );
     // await voltageV3FactoryOwner.setLmPoolDeployer(voltageV3LmPoolDeployer.address);
     await voltageV3Factory.setLmPoolDeployer(voltageV3LmPoolDeployer.address);
@@ -214,8 +215,8 @@ describe("MasterChefV3", function () {
     // Farm 1 month in advance and then upkeep
     await mineUpTo(firstFarmingBlock + 30 * 24 * 60 * 60);
     await masterChefV2.connect(admin).deposit(1, 0);
-    // const cakeFarmed = await cakeToken.balanceOf(admin.address);
-    // console.log(`${ethers.utils.formatUnits(cakeFarmed)} CAKE farmed`);
+    const cakeFarmed = await cakeToken.balanceOf(admin.address);
+    console.log(`${ethers.utils.formatUnits(cakeFarmed)} CAKE farmed`);
     await cakeToken.approve(masterChefV3.address, ethers.constants.MaxUint256);
     await masterChefV3.setReceiver(admin.address);
     await masterChefV3.upkeep(ethers.utils.parseUnits(`${4 * 24 * 60 * 60}`), 24 * 60 * 60, true);
@@ -2983,8 +2984,8 @@ describe("MasterChefV3", function () {
         console.log(`user2: ${ethers.utils.formatUnits(cakeUser2)}`);
         console.log("");
 
-        assert(cakeUser1.sub(ethers.utils.parseUnits("73.99948783")).abs().lte(ethers.utils.parseUnits("0.0000001")));
-        assert(cakeUser2.sub(ethers.utils.parseUnits("122.0005122")).abs().lte(ethers.utils.parseUnits("0.0000001")));
+       assert(cakeUser1.sub(ethers.utils.parseUnits("73.99948783")).abs().lte(ethers.utils.parseUnits("0.0000001")));
+       assert(cakeUser2.sub(ethers.utils.parseUnits("122.0005122")).abs().lte(ethers.utils.parseUnits("0.0000001")));
       });
     });
   });
