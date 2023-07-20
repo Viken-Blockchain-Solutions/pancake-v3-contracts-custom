@@ -9,6 +9,7 @@ import 'dotenv/config'
 import 'solidity-docgen'
 require('dotenv').config({ path: require('find-config')('.env') })
 
+
 const LOW_OPTIMIZER_COMPILER_SETTINGS = {
   version: '0.7.6',
   settings: {
@@ -110,6 +111,7 @@ export default {
       {
         network: "fuse",
         chainId: 122,
+        allowUnlimitedContractSize: true,
         urls: {
           apiURL: "https://explorer.fuse.io/api",
           browserURL: "https://explorer.fuse.io"
@@ -118,6 +120,7 @@ export default {
       {
         network: "spark",
         chainId: 123,
+        allowUnlimitedContractSize: true,
         urls: {
           apiURL: "https://explorer.fusespark.io/api",
           browserURL: "https://explorer.fusespark.io"

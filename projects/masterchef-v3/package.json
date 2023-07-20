@@ -1,14 +1,14 @@
 {
-  "name": "@pancakeswap/masterchef-v3",
+  "name": "@voltageswap/masterchef-v3",
   "version": "1.0.0",
-  "description": "Pancake MasterChef V3",
+  "description": "Voltage MasterChef V3",
   "publishConfig": {
     "access": "public"
   },
-  "author": "PancakeSwap",
+  "author": "VoltageSwap",
   "license": "MIT",
   "keywords": [
-    "pancakeswap",
+    "voltageswap",
     "masterchef",
     "v3"
   ],
@@ -20,8 +20,9 @@
   "scripts": {
     "format:check": "prettier --check './**/*.{js,ts,sol}'",
     "format:write": "prettier --write './**/*.{js,ts,sol}'",
-    "test": "npx hardhat test",
-    "compile": "npx hardhat compile"
+    "test": "npx hardhat test --show-stack-traces",
+    "compile": "npx hardhat compile --show-stack-traces",
+    "deploy": "hardhat run scripts/deploy2.ts --network"
   },
   "devDependencies": {
     "@chainlink/contracts": "^0.6.1",
@@ -37,9 +38,9 @@
     "@openzeppelin/test-helpers": "^0.5.11",
     "@pancakeswap/eslint-config-pancake": "^1.2.0",
     "@pancakeswap/pancake-swap-lib": "0.0.4",
-    "@pancakeswap/v3-core": "*",
-    "@pancakeswap/v3-lm-pool": "*",
-    "@pancakeswap/v3-periphery": "*",
+    "@voltageswap/v3-core": "*",
+    "@voltageswap/v3-lm-pool": "*",
+    "@voltageswap/v3-periphery": "*",
     "@types/chai": "^4.2.21",
     "@types/mocha": "^8.2.2",
     "@types/node": "^14.14.35",

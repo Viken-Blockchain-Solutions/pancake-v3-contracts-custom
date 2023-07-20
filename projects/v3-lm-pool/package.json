@@ -1,11 +1,12 @@
 {
-  "name": "@pancakeswap/v3-lm-pool",
+  "name": "@voltageswap/v3-lm-pool",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
     "compile": "hardhat compile",
-    "test": "echo 'skip'"
+    "test": "echo 'skip'",
+    "deploy": "hardhat run scripts/deploy2.ts --network"
   },
   "devDependencies": {
     "@ethersproject/abi": "^5.4.7",
@@ -15,7 +16,7 @@
     "@nomicfoundation/hardhat-toolbox": "^2.0.0",
     "@nomiclabs/hardhat-ethers": "^2.0.0",
     "@nomiclabs/hardhat-etherscan": "^3.0.0",
-    "@pancakeswap/v3-core": "*",
+    "@voltageswap/v3-core": "*",
     "@typechain/ethers-v5": "^10.2.0",
     "@typechain/hardhat": "^6.1.5",
     "@types/chai": "^4.2.0",

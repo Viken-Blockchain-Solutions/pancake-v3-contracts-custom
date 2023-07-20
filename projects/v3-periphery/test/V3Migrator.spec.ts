@@ -3,7 +3,7 @@ import { constants, Contract, Wallet } from 'ethers'
 import { ethers, waffle } from 'hardhat'
 import {
   IUniswapV2Pair,
-  IPancakeV3Factory,
+  IVoltageV3Factory,
   IWETH9,
   MockTimeNonfungiblePositionManager,
   TestERC20,
@@ -25,12 +25,12 @@ describe('V3Migrator', () => {
 
   const migratorFixture: Fixture<{
     factoryV2: Contract
-    factoryV3: IPancakeV3Factory
+    factoryV3: IVoltageV3Factory
     token: TestERC20
     weth9: IWETH9
     nft: MockTimeNonfungiblePositionManager
     migrator: V3Migrator
-    deployer: Contract
+    //deployer: Contract
   }> = async (wallets, provider) => {
     const { factory, tokens, nft, weth9, deployer } = await completeFixture(wallets, provider)
 
@@ -57,7 +57,7 @@ describe('V3Migrator', () => {
   }
 
   let factoryV2: Contract
-  let factoryV3: IPancakeV3Factory
+  let factoryV3: IVoltageV3Factory
   let token: TestERC20
   let weth9: IWETH9
   let nft: MockTimeNonfungiblePositionManager
