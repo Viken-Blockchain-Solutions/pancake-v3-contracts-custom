@@ -1,5 +1,5 @@
 {
-  "name": "optiFuse-v3",
+  "name": "optifuse-v3",
   "private": true,
   "workspaces": [
     "projects/*",
