@@ -1,6 +1,6 @@
-# VoltageSwap Custom Forking Report: Deployment Summary and Address Mapping
+# OptiFuse Custom Forking Report: Deployment Summary and Address Mapping
 
-This report provides a summary of the steps taken to fork VoltageSwap, the responses received during the process, and the addresses of the deployed contracts.
+This report provides a summary of the steps taken to fork OptiFuse, the responses received during the process, and the addresses of the deployed contracts.
 
 ## Deployment Process Summary
 
@@ -56,7 +56,7 @@ Please note that some warnings/errors may fall under multiple categories, but th
 
 1. The `NETWORK=hardhat yarn zx v3-deploy.mjs` command was then executed to deploy the contracts on the Hardhat network. This resulted in the successful compilation and deployment of several contracts, with warnings about contract code size exceeding 24576 bytes and missing SPDX license identifiers.
 
-2. - Additional deployment commands were executed for specific workspaces, including `@voltageswap/smart-router`, `@voltageswap/masterchef-v3`, and `@voltageswap/v3-lm-pool`. 
+2. - Additional deployment commands were executed for specific workspaces, including `@OptiFuse/smart-router`, `@OptiFuse/masterchef-v3`, and `@OptiFuse/v3-lm-pool`. 
 
 - All these commands resulted in the successful deployment of their respective contracts.
 
@@ -96,15 +96,15 @@ The following table provides a brief description of each of the deployed contrac
 | **MixedRouteQuoterV1** | _Quotes prices for trades that involve multiple routes._ |
 | **QuoterV2** | _Provides prices for trades on the exchange._ |
 | **TokenValidator** | _Validates tokens, checking if a token meets certain criteria before it can be used in the system._ |
-| **VoltageV3Factory** | _Creates new VoltageSwap pairs._ |
-| **VoltageV3PoolDeployer** | _Deploys new VoltageSwap pools._ |
-| **SwapRouter** | _Executes trades on VoltageSwap._ |
+| **VoltageV3Factory** | _Creates new OptiFuse pairs._ |
+| **VoltageV3PoolDeployer** | _Deploys new OptiFuse pools._ |
+| **SwapRouter** | _Executes trades on OptiFuse._ |
 | **V3Migrator** | Migrates liquidity from V2 to V3. |
 | **TickLens** | _Provides a view function to return information about multiple ticks from a pool._ |
 | **NonfungibleTokenPositionDescriptor** | _Generates a URI for a given token position._ |
-| **NonfungiblePositionManager** | _Simplifies the complexity associated with managing positions in VoltageSwap V3._ |
-| **VoltageInterfaceMulticall** | _Makes multiple calls to the VoltageSwap interface in a single transaction._ |
-| **VoltageV3LmPoolDeployer** | _Deploys new liquidity mining pools for VoltageSwap V3._ |
+| **NonfungiblePositionManager** | _Simplifies the complexity associated with managing positions in OptiFuse V3._ |
+| **VoltageInterfaceMulticall** | _Makes multiple calls to the OptiFuse interface in a single transaction._ |
+| **VoltageV3LmPoolDeployer** | _Deploys new liquidity mining pools for OptiFuse V3._ |
 
 - Please note that these descriptions are simplified and the actual functionality of the contracts can be more complex.  
 - For a full understanding, it's recommended to read the contract code or the official documentation.
