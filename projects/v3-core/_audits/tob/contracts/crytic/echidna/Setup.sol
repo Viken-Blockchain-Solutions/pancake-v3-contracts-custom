@@ -65,7 +65,7 @@ contract SetupUniswap {
     OptiFuseV3Factory factory;
 
     constructor(TestERC20 _token0, TestERC20 _token1) {
-        factory = new OptiFuseV3Factory();
+        factory = new OptiFuseV3Factory(address(this));
         token0 = _token0;
         token1 = _token1;
     }
@@ -89,7 +89,7 @@ contract UniswapMinter {
         int128 tU_liqNet;
     }
 
-    constructor(TestERC20 _token0, TestERC20 _token1) public {
+    constructor(TestERC20 _token0, TestERC20 _token1) {
         token0 = _token0;
         token1 = _token1;
     }
@@ -117,8 +117,8 @@ contract UniswapMinter {
             int128
         )
     {
-        (uint128 tL_liqGross, int128 tL_liqNet, , ) = pool.ticks(_tickLower);
-        (uint128 tU_liqGross, int128 tU_liqNet, , ) = pool.ticks(_tickUpper);
+        ( uint128 tL_liqGross, int128 tL_liqNet, , ) = pool.ticks(_tickLower);
+        ( uint128 tU_liqGross, int128 tU_liqNet, , ) = pool.ticks(_tickUpper);
         return (tL_liqGross, tL_liqNet, tU_liqGross, tU_liqNet);
     }
 
