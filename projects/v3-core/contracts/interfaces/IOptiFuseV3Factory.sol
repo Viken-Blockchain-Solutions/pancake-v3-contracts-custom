@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 pragma solidity >=0.5.0;
 
-/// @title The interface for the VoltageSwap V3 Factory
-/// @notice The VoltageSwap V3 Factory facilitates creation of VoltageSwap V3 pools and control over the protocol fees
-interface IVoltageV3Factory {
+/// @title The interface for the OptiFuseDEX  V3 Factory
+/// @notice The OptiFuseDEX  V3 Factory facilitates creation of OptiFuseDEX  V3 pools and control over the protocol fees
+interface IOptiFuseV3Factory {
     struct TickSpacingExtraInfo {
         bool whitelistRequested;
         bool enabled;

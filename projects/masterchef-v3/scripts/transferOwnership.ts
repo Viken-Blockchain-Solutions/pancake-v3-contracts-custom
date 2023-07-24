@@ -1,8 +1,8 @@
 /* eslint-disable camelcase */
 import { ethers, run, network } from "hardhat";
 import { Contract } from "ethers";
-import { configs } from "@voltageswap/common/config";
-import { tryVerify } from "@voltageswap/common/verify";
+import { configs } from "@optifusedex/common/config";
+import { tryVerify } from "@optifusedex/common/verify";
 import { writeFileSync } from "fs";
 
 const abi = [
@@ -80,7 +80,7 @@ const abi = [
   },
   {
     inputs: [],
-    name: "NotVoltageNFT",
+    name: "NotOptiFuseNFT",
     type: "error",
   },
   {
@@ -110,7 +110,7 @@ const abi = [
       },
       {
         indexed: true,
-        internalType: "contract IVoltageV3Pool",
+        internalType: "contract IOptiFuseV3Pool",
         name: "v3Pool",
         type: "address",
       },
@@ -593,7 +593,7 @@ const abi = [
         type: "uint256",
       },
       {
-        internalType: "contract IVoltageV3Pool",
+        internalType: "contract IOptiFuseV3Pool",
         name: "_v3Pool",
         type: "address",
       },
@@ -1056,7 +1056,7 @@ const abi = [
         type: "uint256",
       },
       {
-        internalType: "contract IVoltageV3Pool",
+        internalType: "contract IOptiFuseV3Pool",
         name: "v3Pool",
         type: "address",
       },

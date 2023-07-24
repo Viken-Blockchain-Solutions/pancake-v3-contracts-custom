@@ -1,5 +1,5 @@
 {
-  "name": "voltage-v3",
+  "name": "optiFuse-v3",
   "private": true,
   "workspaces": [
     "projects/*",

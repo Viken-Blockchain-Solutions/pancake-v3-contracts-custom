@@ -1,7 +1,7 @@
 /* 
-import { verifyContract } from "@voltageswap/common/verify";
-import { sleep } from "@voltageswap/common/sleep";
-import { configs } from "@voltageswap/common/config";
+import { verifyContract } from "@optifusedex/common/verify";
+import { sleep } from "@optifusedex/common/sleep";
+import { configs } from "@optifusedex/common/config";
 import { network } from "hardhat";
 
 async function main() {
@@ -11,8 +11,8 @@ async function main() {
   if (!config) {
     throw new Error(`No config found for network ${networkName}`);
   }
-  const deployedContracts_masterchef_v3 = await import(`@voltageswap/masterchef-v3/deployments/${networkName}.json`);
-  const deployedContracts_v3_periphery = await import(`@voltageswap/v3-periphery/deployments/${networkName}.json`);
+  const deployedContracts_masterchef_v3 = await import(`@optifusedex/masterchef-v3/deployments/${networkName}.json`);
+  const deployedContracts_v3_periphery = await import(`@optifusedex/v3-periphery/deployments/${networkName}.json`);
 
   // Verify masterChefV3
   console.log("Verify masterChefV3");

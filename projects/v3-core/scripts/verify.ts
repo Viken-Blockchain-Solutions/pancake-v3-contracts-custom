@@ -1,18 +1,18 @@
-/* import { verifyContract } from '@voltageswap/common/verify'
-import { sleep } from '@voltageswap/common/sleep'
+/* import { verifyContract } from '@optifusedex/common/verify'
+import { sleep } from '@optifusedex/common/sleep'
 
 async function main() {
   const networkName = network.name
-  const deployedContracts = await import(`@voltageswap/v3-core/deployments/${networkName}.json`)
+  const deployedContracts = await import(`@optifusedex/v3-core/deployments/${networkName}.json`)
 
-  // Verify VoltageV3PoolDeployer
-  console.log('Verify VoltageV3PoolDeployer')
-  await verifyContract(deployedContracts.VoltageV3PoolDeployer)
+  // Verify OptiFuseV3PoolDeployer
+  console.log('Verify OptiFuseV3PoolDeployer')
+  await verifyContract(deployedContracts.OptiFuseV3PoolDeployer)
   await sleep(10000)
 
-  // Verify voltageV3Factory
-  console.log('Verify voltageV3Factory')
-  await verifyContract(deployedContracts.VoltageV3Factory, [deployedContracts.VoltageV3PoolDeployer])
+  // Verify optiFuseV3Factory
+  console.log('Verify optiFuseV3Factory')
+  await verifyContract(deployedContracts.OptiFuseV3Factory, [deployedContracts.OptiFuseV3PoolDeployer])
   await sleep(10000)
 }
 

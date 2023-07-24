@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity =0.7.6;
 
-import '@voltageswap/v3-core/contracts/interfaces/callback/IVoltageV3SwapCallback.sol';
-import '@voltageswap/v3-core/contracts/libraries/SafeCast.sol';
-import '@voltageswap/v3-core/contracts/interfaces/IVoltageV3Pool.sol';
+import '@optifusedex/v3-core/contracts/interfaces/callback/IOptiFuseV3SwapCallback.sol';
+import '@optifusedex/v3-core/contracts/libraries/SafeCast.sol';
+import '@optifusedex/v3-core/contracts/interfaces/IOptiFuseV3Pool.sol';
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
 
-contract TestVoltageswapCallee is IVoltageV3SwapCallback {
+contract TestOptiFuseswapCallee is IOptiFuseV3SwapCallback {
     using SafeCast for uint256;
 
     function swapExact0For1(
@@ -15,7 +15,7 @@ contract TestVoltageswapCallee is IVoltageV3SwapCallback {
         address recipient,
         uint160 sqrtPriceLimitX96
     ) external {
-        IVoltageV3Pool(pool).swap(recipient, true, amount0In.toInt256(), sqrtPriceLimitX96, abi.encode(msg.sender));
+        IOptiFuseV3Pool(pool).swap(recipient, true, amount0In.toInt256(), sqrtPriceLimitX96, abi.encode(msg.sender));
     }
 
     function swap0ForExact1(
@@ -24,7 +24,7 @@ contract TestVoltageswapCallee is IVoltageV3SwapCallback {
         address recipient,
         uint160 sqrtPriceLimitX96
     ) external {
-        IVoltageV3Pool(pool).swap(recipient, true, -amount1Out.toInt256(), sqrtPriceLimitX96, abi.encode(msg.sender));
+        IOptiFuseV3Pool(pool).swap(recipient, true, -amount1Out.toInt256(), sqrtPriceLimitX96, abi.encode(msg.sender));
     }
 
     function swapExact1For0(
@@ -33,7 +33,7 @@ contract TestVoltageswapCallee is IVoltageV3SwapCallback {
         address recipient,
         uint160 sqrtPriceLimitX96
     ) external {
-        IVoltageV3Pool(pool).swap(recipient, false, amount1In.toInt256(), sqrtPriceLimitX96, abi.encode(msg.sender));
+        IOptiFuseV3Pool(pool).swap(recipient, false, amount1In.toInt256(), sqrtPriceLimitX96, abi.encode(msg.sender));
     }
 
     function swap1ForExact0(
@@ -42,10 +42,10 @@ contract TestVoltageswapCallee is IVoltageV3SwapCallback {
         address recipient,
         uint160 sqrtPriceLimitX96
     ) external {
-        IVoltageV3Pool(pool).swap(recipient, false, -amount0Out.toInt256(), sqrtPriceLimitX96, abi.encode(msg.sender));
+        IOptiFuseV3Pool(pool).swap(recipient, false, -amount0Out.toInt256(), sqrtPriceLimitX96, abi.encode(msg.sender));
     }
 
-    function VoltageV3SwapCallback(
+    function OptiFuseV3SwapCallback(
         int256 amount0Delta,
         int256 amount1Delta,
         bytes calldata data
@@ -53,10 +53,10 @@ contract TestVoltageswapCallee is IVoltageV3SwapCallback {
         address sender = abi.decode(data, (address));
 
         if (amount0Delta > 0) {
-            IERC20(IVoltageV3Pool(msg.sender).token0()).transferFrom(sender, msg.sender, uint256(amount0Delta));
+            IERC20(IOptiFuseV3Pool(msg.sender).token0()).transferFrom(sender, msg.sender, uint256(amount0Delta));
         } else {
             assert(amount1Delta > 0);
-            IERC20(IVoltageV3Pool(msg.sender).token1()).transferFrom(sender, msg.sender, uint256(amount1Delta));
+            IERC20(IOptiFuseV3Pool(msg.sender).token1()).transferFrom(sender, msg.sender, uint256(amount1Delta));
         }
     }
 }

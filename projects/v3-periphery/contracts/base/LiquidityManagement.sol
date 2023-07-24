@@ -3,9 +3,9 @@ pragma solidity =0.7.6;
 pragma abicoder v2;
 
 
-import '@voltageswap/v3-core/contracts/interfaces/IVoltageV3Factory.sol';
-import '@voltageswap/v3-core/contracts/interfaces/callback/IVoltageV3MintCallback.sol';
-import '@voltageswap/v3-core/contracts/libraries/TickMath.sol';
+import '@optifusedex/v3-core/contracts/interfaces/IOptiFuseV3Factory.sol';
+import '@optifusedex/v3-core/contracts/interfaces/callback/IOptiFuseV3MintCallback.sol';
+import '@optifusedex/v3-core/contracts/libraries/TickMath.sol';
 
 import '../libraries/PoolAddress.sol';
 import '../libraries/CallbackValidation.sol';
@@ -15,15 +15,15 @@ import './PeripheryPayments.sol';
 import './PeripheryImmutableState.sol';
 
 /// @title Liquidity management functions
-/// @notice Internal functions for safely managing liquidity in VoltageSwap V3
-abstract contract LiquidityManagement is IVoltageV3MintCallback, PeripheryImmutableState, PeripheryPayments {
+/// @notice Internal functions for safely managing liquidity in OptiFuseDEX  V3
+abstract contract LiquidityManagement is IOptiFuseV3MintCallback, PeripheryImmutableState, PeripheryPayments {
     struct MintCallbackData {
         PoolAddress.PoolKey poolKey;
         address payer;
     }
 
-    /// @inheritdoc IVoltageV3MintCallback
-    function VoltageV3MintCallback(
+    /// @inheritdoc IOptiFuseV3MintCallback
+    function OptiFuseV3MintCallback(
         uint256 amount0Owed,
         uint256 amount1Owed,
         bytes calldata data
@@ -55,13 +55,13 @@ abstract contract LiquidityManagement is IVoltageV3MintCallback, PeripheryImmuta
             uint128 liquidity,
             uint256 amount0,
             uint256 amount1,
-            IVoltageV3Pool pool
+            IOptiFuseV3Pool pool
         )
     {
         PoolAddress.PoolKey memory poolKey =
             PoolAddress.PoolKey({token0: params.token0, token1: params.token1, fee: params.fee});
 
-        pool = IVoltageV3Pool(PoolAddress.computeAddress(deployer, poolKey));
+        pool = IOptiFuseV3Pool(PoolAddress.computeAddress(deployer, poolKey));
 
         // compute the liquidity amount
         {

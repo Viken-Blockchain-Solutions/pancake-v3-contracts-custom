@@ -5,21 +5,21 @@ import { parseEther } from "ethers/lib/utils";
 import { BigNumber } from "ethers";
 import { assert, expect } from "chai";
 
-const VoltageStableSwapFactory = artifacts.require("stable-swap/contracts/VoltageStableSwapFactory.sol");
-const VoltageStableSwapLPFactory = artifacts.require("stable-swap/contracts/VoltageStableSwapLPFactory.sol");
-const VoltageStableSwapTwoPoolDeployer = artifacts.require("stable-swap/contracts/VoltageStableSwapTwoPoolDeployer.sol");
-const VoltageStableSwapThreePoolDeployer = artifacts.require("stable-swap/contracts/VoltageStableSwapThreePoolDeployer.sol");
-const VoltageStableSwapTwoPool = artifacts.require("stable-swap/contracts/VoltageStableSwapTwoPool.sol");
-const VoltageStableSwapThreePool = artifacts.require("stable-swap/contracts/VoltageStableSwapThreePool.sol");
-const VoltageStableSwapTwoPoolInfo = artifacts.require("stable-swap/contracts/utils/VoltageStableSwapTwoPoolInfo.sol");
-const VoltageStableSwapThreePoolInfo = artifacts.require("stable-swap/contracts/utils/VoltageStableSwapThreePoolInfo.sol");
-const VoltageStableSwapInfo = artifacts.require("stable-swap/contracts/utils/VoltageStableSwapInfo.sol");
-const LPToken = artifacts.require("stable-swap/contracts/VoltageStableSwapLP.sol");
+const OptiFuseStableSwapFactory = artifacts.require("stable-swap/contracts/OptiFuseStableSwapFactory.sol");
+const OptiFuseStableSwapLPFactory = artifacts.require("stable-swap/contracts/OptiFuseStableSwapLPFactory.sol");
+const OptiFuseStableSwapTwoPoolDeployer = artifacts.require("stable-swap/contracts/OptiFuseStableSwapTwoPoolDeployer.sol");
+const OptiFuseStableSwapThreePoolDeployer = artifacts.require("stable-swap/contracts/OptiFuseStableSwapThreePoolDeployer.sol");
+const OptiFuseStableSwapTwoPool = artifacts.require("stable-swap/contracts/OptiFuseStableSwapTwoPool.sol");
+const OptiFuseStableSwapThreePool = artifacts.require("stable-swap/contracts/OptiFuseStableSwapThreePool.sol");
+const OptiFuseStableSwapTwoPoolInfo = artifacts.require("stable-swap/contracts/utils/OptiFuseStableSwapTwoPoolInfo.sol");
+const OptiFuseStableSwapThreePoolInfo = artifacts.require("stable-swap/contracts/utils/OptiFuseStableSwapThreePoolInfo.sol");
+const OptiFuseStableSwapInfo = artifacts.require("stable-swap/contracts/utils/OptiFuseStableSwapInfo.sol");
+const LPToken = artifacts.require("stable-swap/contracts/OptiFuseStableSwapLP.sol");
 const Token = artifacts.require("stable-swap/contracts/test/Token.sol");
 const FeeOnTransferToken = artifacts.require("exchange-protocol/contracts/test/FeeOnTransferToken.sol");
-const VoltageFactory = artifacts.require("exchange-protocol/contracts/VoltageFactory.sol");
-const VoltagePair = artifacts.require("exchange-protocol/contracts/VoltagePair.sol");
-const VoltageRouter = artifacts.require("exchange-protocol/contracts/VoltageRouter.sol");
+const OptiFuseFactory = artifacts.require("exchange-protocol/contracts/OptiFuseFactory.sol");
+const OptiFusePair = artifacts.require("exchange-protocol/contracts/OptiFusePair.sol");
+const OptiFuseRouter = artifacts.require("exchange-protocol/contracts/OptiFuseRouter.sol");
 const WrappedBNB = artifacts.require("exchange-protocol/contracts/libraries/WBNB.sol");
 const StableSwapRouterHelper = artifacts.require("./libraries/StableSwapRouterHelper.sol");
 const SmartRouter = artifacts.require("./SmartRouter.sol");
@@ -58,8 +58,8 @@ contract("SmartRouter", ([admin, bob, carol]) => {
     const A = 1000;
     const Fee = 4000000;
     const AdminFee = 5000000000;
-    let voltageFactory;
-    let voltageRouter;
+    let optiFuseFactory;
+    let optiFuseRouter;
     let WBNB;
     let pool_WBNB_BUSD;
     let pool_BUSD_USDC;
@@ -92,15 +92,15 @@ contract("SmartRouter", ([admin, bob, carol]) => {
 
 
         /** Create Stable Swap */
-        stableSwapLPFactory = await VoltageStableSwapLPFactory.new({ from: admin });
-        stableSwap2PoolDeployer = await VoltageStableSwapTwoPoolDeployer.new({ from: admin });
-        stableSwap3PoolDeployer = await VoltageStableSwapThreePoolDeployer.new({ from: admin });
-        stableSwapFactory = await VoltageStableSwapFactory.new(stableSwapLPFactory.address, stableSwap2PoolDeployer.address, stableSwap3PoolDeployer.address, {
+        stableSwapLPFactory = await OptiFuseStableSwapLPFactory.new({ from: admin });
+        stableSwap2PoolDeployer = await OptiFuseStableSwapTwoPoolDeployer.new({ from: admin });
+        stableSwap3PoolDeployer = await OptiFuseStableSwapThreePoolDeployer.new({ from: admin });
+        stableSwapFactory = await OptiFuseStableSwapFactory.new(stableSwapLPFactory.address, stableSwap2PoolDeployer.address, stableSwap3PoolDeployer.address, {
             from: admin,
         });
-        stableSwap2PoolInfo = await VoltageStableSwapTwoPoolInfo.new({ from: admin });
-        stableSwap3PoolInfo = await VoltageStableSwapThreePoolInfo.new({ from: admin });
-        stableSwapPoolInfo = await VoltageStableSwapInfo.new(stableSwap2PoolInfo.address, stableSwap3PoolInfo.address, { from: admin });
+        stableSwap2PoolInfo = await OptiFuseStableSwapTwoPoolInfo.new({ from: admin });
+        stableSwap3PoolInfo = await OptiFuseStableSwapThreePoolInfo.new({ from: admin });
+        stableSwapPoolInfo = await OptiFuseStableSwapInfo.new(stableSwap2PoolInfo.address, stableSwap3PoolInfo.address, { from: admin });
 
         await stableSwapLPFactory.transferOwnership(stableSwapFactory.address, { from: admin });
         await stableSwap2PoolDeployer.transferOwnership(stableSwapFactory.address, { from: admin });
@@ -108,19 +108,19 @@ contract("SmartRouter", ([admin, bob, carol]) => {
 
         await stableSwapFactory.createSwapPair(BUSD.address, USDC.address, A, Fee, AdminFee, { from: admin });
         stable2PoolInfo = await stableSwapFactory.getPairInfo(BUSD.address, USDC.address);
-        stable2Pool_BUSD_USDC = await VoltageStableSwapTwoPool.at(stable2PoolInfo.swapContract);
+        stable2Pool_BUSD_USDC = await OptiFuseStableSwapTwoPool.at(stable2PoolInfo.swapContract);
         stable2Pool_LP_BUSD_USDC = await LPToken.at(stable2PoolInfo.LPContract);
         stable2Pool_token0 = await Token.at(stable2PoolInfo.token0);
         stable2Pool_token1 = await Token.at(stable2PoolInfo.token1);
         await stableSwapFactory.createSwapPair(WBNB.address, BUSD.address, A, Fee, AdminFee, { from: admin });
         stable2PoolInfo_WBNB_BUSD = await stableSwapFactory.getPairInfo(WBNB.address, BUSD.address);
-        stable2Pool_WBNB_BUSD = await VoltageStableSwapTwoPool.at(stable2PoolInfo_WBNB_BUSD.swapContract);
+        stable2Pool_WBNB_BUSD = await OptiFuseStableSwapTwoPool.at(stable2PoolInfo_WBNB_BUSD.swapContract);
         stable2Pool_LP_WBNB_BUSD = await LPToken.at(stable2PoolInfo_WBNB_BUSD.LPContract);
         stable2Pool_WBNB_BUSD_token0 = await Token.at(stable2PoolInfo_WBNB_BUSD.token0);
         stable2Pool_WBNB_BUSD_token1 = await Token.at(stable2PoolInfo_WBNB_BUSD.token1);
         await stableSwapFactory.createThreePoolPair(BUSD.address, USDC.address, USDT.address, A, Fee, AdminFee, { from: admin });
         stable3PoolInfo = await stableSwapFactory.getThreePoolPairInfo(BUSD.address, USDC.address);
-        stable3Pool_BUSD_USDC_USDT = await VoltageStableSwapThreePool.at(stable3PoolInfo.swapContract);
+        stable3Pool_BUSD_USDC_USDT = await OptiFuseStableSwapThreePool.at(stable3PoolInfo.swapContract);
         stable3Pool_LP_BUSD_USDC_USDT = await LPToken.at(stable3PoolInfo.LPContract);
         stable3Pool_token0 = await Token.at(stable3PoolInfo.token0);
         stable3Pool_token1 = await Token.at(stable3PoolInfo.token1);

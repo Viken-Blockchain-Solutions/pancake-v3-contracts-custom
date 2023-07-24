@@ -1,5 +1,5 @@
 import { ethers } from 'hardhat'
-import VoltageV3PoolArtifact from '../artifacts/contracts/VoltageV3Pool.sol/VoltageV3Pool.json'
+import OptiFuseV3PoolArtifact from '../artifacts/contracts/OptiFuseV3Pool.sol/OptiFuseV3Pool.json'
 
-const hash = ethers.utils.keccak256(VoltageV3PoolArtifact.bytecode)
+const hash = ethers.utils.keccak256(OptiFuseV3PoolArtifact.bytecode)
 console.log(hash)

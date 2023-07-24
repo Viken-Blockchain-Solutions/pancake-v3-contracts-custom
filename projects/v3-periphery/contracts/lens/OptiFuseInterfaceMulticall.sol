@@ -2,8 +2,8 @@
 pragma solidity =0.7.6;
 pragma abicoder v2;
 
-/// @notice A fork of Multicall2 specifically tailored for the Voltage Interface
-contract VoltageInterfaceMulticall {
+/// @notice A fork of Multicall2 specifically tailored for the OptiFuse Interface
+contract OptiFuseInterfaceMulticall {
     struct Call {
         address target;
         uint256 gasLimit;

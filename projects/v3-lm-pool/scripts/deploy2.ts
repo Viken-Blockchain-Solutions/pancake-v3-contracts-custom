@@ -1,8 +1,8 @@
 import { ethers, network } from 'hardhat'
-import { configs } from '@voltageswap/common/config'
-import { tryVerify } from '@voltageswap/common/verify'
+import { configs } from '@optifusedex/common/config'
+import { tryVerify } from '@optifusedex/common/verify'
 import fs from 'fs'
-import { abi } from '@voltageswap/v3-core/artifacts/contracts/VoltageV3Factory.sol/VoltageV3Factory.json'
+import { abi } from '@optifusedex/v3-core/artifacts/contracts/OptiFuseV3Factory.sol/OptiFuseV3Factory.json'
 
 import { parseEther } from 'ethers/lib/utils'
 const currentNetwork = network.name
@@ -16,22 +16,22 @@ async function main() {
     throw new Error(`No config found for network ${networkName}`)
   }
 
-  const v3DeployedContracts = await import(`@voltageswap/v3-core/deployments/${networkName}.json`)
-  const mcV3DeployedContracts = await import(`@voltageswap/masterchef-v3/deployments/${networkName}.json`)
+  const v3DeployedContracts = await import(`@optifusedex/v3-core/deployments/${networkName}.json`)
+  const mcV3DeployedContracts = await import(`@optifusedex/masterchef-v3/deployments/${networkName}.json`)
 
-  const voltageV3Factory_address = v3DeployedContracts.VoltageV3Factory
+  const optiFuseV3Factory_address = v3DeployedContracts.OptiFuseV3Factory
 
-  const VoltageV3LmPoolDeployer = await ethers.getContractFactory('VoltageV3LmPoolDeployer')
-  const voltageV3LmPoolDeployer = await VoltageV3LmPoolDeployer.deploy(mcV3DeployedContracts.MasterChefV3)
+  const OptiFuseV3LmPoolDeployer = await ethers.getContractFactory('OptiFuseV3LmPoolDeployer')
+  const optiFuseV3LmPoolDeployer = await OptiFuseV3LmPoolDeployer.deploy(mcV3DeployedContracts.MasterChefV3)
 
-  console.log('voltageV3LmPoolDeployer deployed to:', voltageV3LmPoolDeployer.address)
+  console.log('optiFuseV3LmPoolDeployer deployed to:', optiFuseV3LmPoolDeployer.address)
 
-  const voltageV3Factory = new ethers.Contract(voltageV3Factory_address, abi, owner)
+  const optiFuseV3Factory = new ethers.Contract(optiFuseV3Factory_address, abi, owner)
 
-  await voltageV3Factory.setLmPoolDeployer(voltageV3LmPoolDeployer.address)
+  await optiFuseV3Factory.setLmPoolDeployer(optiFuseV3LmPoolDeployer.address)
 
   const contracts = {
-    VoltageV3LmPoolDeployer: voltageV3LmPoolDeployer.address,
+    OptiFuseV3LmPoolDeployer: optiFuseV3LmPoolDeployer.address,
   }
   fs.writeFileSync(`./deployments/${networkName}.json`, JSON.stringify(contracts, null, 2))
 }

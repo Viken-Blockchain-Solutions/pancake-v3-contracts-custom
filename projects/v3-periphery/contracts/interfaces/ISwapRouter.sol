@@ -2,11 +2,11 @@
 pragma solidity >=0.7.5;
 pragma abicoder v2;
 
-import '@voltageswap/v3-core/contracts/interfaces/callback/IVoltageV3SwapCallback.sol';
+import '@optifusedex/v3-core/contracts/interfaces/callback/IOptiFuseV3SwapCallback.sol';
 
 /// @title Router token swapping functionality
-/// @notice Functions for swapping tokens via VoltageSwap V3
-interface ISwapRouter is IVoltageV3SwapCallback {
+/// @notice Functions for swapping tokens via OptiFuseDEX  V3
+interface ISwapRouter is IOptiFuseV3SwapCallback {
     struct ExactInputSingleParams {
         address tokenIn;
         address tokenOut;

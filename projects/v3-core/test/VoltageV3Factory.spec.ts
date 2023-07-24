@@ -1,7 +1,7 @@
 import { Wallet } from 'ethers'
 import { ethers, waffle } from 'hardhat'
-import { VoltageV3Factory } from '../typechain-types/contracts/VoltageV3Factory'
-import { VoltageV3PoolDeployer } from '../typechain-types/contracts/VoltageV3PoolDeployer'
+import { OptiFuseV3Factory } from '../typechain-types/contracts/OptiFuseV3Factory'
+import { OptiFuseV3PoolDeployer } from '../typechain-types/contracts/OptiFuseV3PoolDeployer'
 import { expect } from './shared/expect'
 import snapshotGasCost from './shared/snapshotGasCost'
 
@@ -16,20 +16,20 @@ const TEST_ADDRESSES: [string, string] = [
 
 const createFixtureLoader = waffle.createFixtureLoader
 
-describe('VoltageV3Factory', () => {
+describe('OptiFuseV3Factory', () => {
   let wallet: Wallet, other: Wallet
 
-  let deployer: VoltageV3PoolDeployer
-  let factory: VoltageV3Factory
+  let deployer: OptiFuseV3PoolDeployer
+  let factory: OptiFuseV3Factory
   let poolBytecode: string
   const fixture = async () => {
-    const deployerFactory = await ethers.getContractFactory('VoltageV3PoolDeployer')
-    const factoryFactory = await ethers.getContractFactory('VoltageV3Factory')
-    const deployer_ = (await deployerFactory.deploy()) as VoltageV3PoolDeployer
-    const factory_ = (await factoryFactory.deploy(deployer_.address)) as VoltageV3Factory
+    const deployerFactory = await ethers.getContractFactory('OptiFuseV3PoolDeployer')
+    const factoryFactory = await ethers.getContractFactory('OptiFuseV3Factory')
+    const deployer_ = (await deployerFactory.deploy()) as OptiFuseV3PoolDeployer
+    const factory_ = (await factoryFactory.deploy(deployer_.address)) as OptiFuseV3Factory
 
     await deployer_.setFactoryAddress(factory_.address)
-    return [factory_, deployer_] as [VoltageV3Factory, VoltageV3PoolDeployer]
+    return [factory_, deployer_] as [OptiFuseV3Factory, OptiFuseV3PoolDeployer]
   }
 
   let loadFixture: ReturnType<typeof createFixtureLoader>
@@ -40,7 +40,7 @@ describe('VoltageV3Factory', () => {
   })
 
   before('load pool bytecode', async () => {
-    poolBytecode = (await ethers.getContractFactory('VoltageV3Pool')).bytecode
+    poolBytecode = (await ethers.getContractFactory('OptiFuseV3Pool')).bytecode
   })
 
   beforeEach('deploy factory', async () => {
@@ -84,7 +84,7 @@ describe('VoltageV3Factory', () => {
     expect(await factory.getPool(tokens[0], tokens[1], feeAmount), 'getPool in order').to.eq(create2Address)
     expect(await factory.getPool(tokens[1], tokens[0], feeAmount), 'getPool in reverse').to.eq(create2Address)
 
-    const poolContractFactory = await ethers.getContractFactory('VoltageV3Pool')
+    const poolContractFactory = await ethers.getContractFactory('OptiFuseV3Pool')
     const pool = poolContractFactory.attach(create2Address)
     expect(await pool.factory(), 'pool factory address').to.eq(factory.address)
     expect(await pool.token0(), 'pool token0').to.eq(TEST_ADDRESSES[0])

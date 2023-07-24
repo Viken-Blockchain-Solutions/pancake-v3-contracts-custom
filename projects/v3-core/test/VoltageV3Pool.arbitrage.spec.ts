@@ -1,9 +1,9 @@
 import Decimal from 'decimal.js'
 import { BigNumber, BigNumberish, Wallet } from 'ethers'
 import { ethers, waffle } from 'hardhat'
-import { MockTimeVoltageV3Pool } from '../typechain-types/contracts/test/MockTimeVoltageV3Pool'
+import { MockTimeOptiFuseV3Pool } from '../typechain-types/contracts/test/MockTimeOptiFuseV3Pool'
 import { TickMathTest } from '../typechain-types/contracts/test/TickMathTest'
-import { VoltageV3PoolSwapTest } from '../typechain-types/contracts/test/VoltageV3PoolSwapTest'
+import { OptiFuseV3PoolSwapTest } from '../typechain-types/contracts/test/OptiFuseV3PoolSwapTest'
 import { expect } from './shared/expect'
 
 import { poolFixture } from './shared/fixtures'
@@ -48,7 +48,7 @@ function applySqrtRatioBipsHundredthsDelta(sqrtRatio: BigNumber, bipsHundredths:
   )
 }
 
-describe('VoltageV3Pool arbitrage tests', () => {
+describe('OptiFuseV3Pool arbitrage tests', () => {
   let wallet: Wallet, arbitrageur: Wallet
 
   let loadFixture: ReturnType<typeof createFixtureLoader>
@@ -90,8 +90,8 @@ describe('VoltageV3Pool arbitrage tests', () => {
                 pool,
               })
 
-            const testerFactory = await ethers.getContractFactory('VoltageV3PoolSwapTest')
-            const tester = (await testerFactory.deploy()) as VoltageV3PoolSwapTest
+            const testerFactory = await ethers.getContractFactory('OptiFuseV3PoolSwapTest')
+            const tester = (await testerFactory.deploy()) as OptiFuseV3PoolSwapTest
 
             const tickMathFactory = await ethers.getContractFactory('TickMathTest')
             const tickMath = (await tickMathFactory.deploy()) as TickMathTest
@@ -113,9 +113,9 @@ describe('VoltageV3Pool arbitrage tests', () => {
           let swapToHigherPrice: SwapFunction
           let swapToLowerPrice: SwapFunction
           let swapExact1For0: SwapFunction
-          let pool: MockTimeVoltageV3Pool
+          let pool: MockTimeOptiFuseV3Pool
           let mint: MintFunction
-          let tester: VoltageV3PoolSwapTest
+          let tester: OptiFuseV3PoolSwapTest
           let tickMath: TickMathTest
 
           beforeEach('load the fixture', async () => {

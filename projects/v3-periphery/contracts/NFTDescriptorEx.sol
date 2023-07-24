@@ -2,10 +2,10 @@
 pragma solidity >=0.7.0;
 pragma abicoder v2;
 
-import '@voltageswap/v3-core/contracts/interfaces/IVoltageV3Pool.sol';
-import '@voltageswap/v3-core/contracts/libraries/TickMath.sol';
-import '@voltageswap/v3-core/contracts/libraries/BitMath.sol';
-import '@voltageswap/v3-core/contracts/libraries/FullMath.sol';
+import '@optifusedex/v3-core/contracts/interfaces/IOptiFuseV3Pool.sol';
+import '@optifusedex/v3-core/contracts/libraries/TickMath.sol';
+import '@optifusedex/v3-core/contracts/libraries/BitMath.sol';
+import '@optifusedex/v3-core/contracts/libraries/FullMath.sol';
 import '@openzeppelin/contracts/utils/Strings.sol';
 import '@openzeppelin/contracts/math/SafeMath.sol';
 import '@openzeppelin/contracts/math/SignedSafeMath.sol';
@@ -136,7 +136,7 @@ contract NFTDescriptorEx {
         return
         string(
             abi.encodePacked(
-                'This NFT represents a liquidity position in a Voltage V3 ',
+                'This NFT represents a liquidity position in a OptiFuse V3 ',
                 quoteTokenSymbol,
                 '-',
                 baseTokenSymbol,
@@ -184,7 +184,7 @@ contract NFTDescriptorEx {
     return
         string(
             abi.encodePacked(
-                'Voltage - ',
+                'OptiFuse - ',
                 feeTier,
                 ' - ',
                 escapeQuotes(params.quoteTokenSymbol),

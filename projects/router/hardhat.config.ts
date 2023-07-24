@@ -157,19 +157,19 @@ const config: HardhatUserConfig = {
       },
     ],
     overrides: {
-      '@voltageswap/v3-core/contracts/libraries/FullMath.sol': {
+      '@optifusedex/v3-core/contracts/libraries/FullMath.sol': {
         version: '0.7.6',
         settings: {},
       },
-      '@voltageswap/v3-core/contracts/libraries/TickBitmap.sol': {
+      '@optifusedex/v3-core/contracts/libraries/TickBitmap.sol': {
         version: '0.7.6',
         settings: {},
       },
-      '@voltageswap/v3-core/contracts/libraries/TickMath.sol': {
+      '@optifusedex/v3-core/contracts/libraries/TickMath.sol': {
         version: '0.7.6',
         settings: {},
       },
-      '@voltageswap/v3-periphery/contracts/libraries/PoolAddress.sol': {
+      '@optifusedex/v3-periphery/contracts/libraries/PoolAddress.sol': {
         version: '0.7.6',
         settings: {},
       },

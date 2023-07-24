@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 pragma solidity =0.7.6;
 
-import '@voltageswap/v3-core/contracts/interfaces/IVoltageV3Pool.sol';
+import '@optifusedex/v3-core/contracts/interfaces/IOptiFuseV3Pool.sol';
 import './PoolAddress.sol';
 
-/// @notice Provides validation for callbacks from VoltageSwap V3 Pools
+/// @notice Provides validation for callbacks from OptiFuseDEX  V3 Pools
 library CallbackValidation {
-    /// @notice Returns the address of a valid VoltageSwap V3 Pool
-    /// @param deployer The contract address of the VoltageSwap V3 Deployer
+    /// @notice Returns the address of a valid OptiFuseDEX  V3 Pool
+    /// @param deployer The contract address of the OptiFuseDEX  V3 Deployer
     /// @param tokenA The contract address of either token0 or token1
     /// @param tokenB The contract address of the other token
     /// @param fee The fee collected upon every swap in the pool, denominated in hundredths of a bip
@@ -17,20 +17,20 @@ library CallbackValidation {
         address tokenA,
         address tokenB,
         uint24 fee
-    ) internal view returns (IVoltageV3Pool pool) {
+    ) internal view returns (IOptiFuseV3Pool pool) {
         return verifyCallback(deployer, PoolAddress.getPoolKey(tokenA, tokenB, fee));
     }
 
-    /// @notice Returns the address of a valid VoltageSwap V3 Pool
-    /// @param deployer The contract address of the VoltageSwap V3 deployer
+    /// @notice Returns the address of a valid OptiFuseDEX  V3 Pool
+    /// @param deployer The contract address of the OptiFuseDEX  V3 deployer
     /// @param poolKey The identifying key of the V3 pool
     /// @return pool The V3 pool contract address
     function verifyCallback(address deployer, PoolAddress.PoolKey memory poolKey)
         internal
         view
-        returns (IVoltageV3Pool pool)
+        returns (IOptiFuseV3Pool pool)
     {
-        pool = IVoltageV3Pool(PoolAddress.computeAddress(deployer, poolKey));
+        pool = IOptiFuseV3Pool(PoolAddress.computeAddress(deployer, poolKey));
         require(msg.sender == address(pool));
     }
 }

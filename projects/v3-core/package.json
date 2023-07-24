@@ -1,21 +1,21 @@
 {
-  "name": "@voltageswap/v3-core",
-  "description": "🥞 Core smart contracts of VoltageSwap V3",
+  "name": "@optifusedex/v3-core",
+  "description": "🥞 Core smart contracts of OptiFuseDEX  V3",
   "license": "GPL-2.0-or-later",
   "publishConfig": {
     "access": "public"
   },
   "version": "1.0.2",
   "keywords": [
-    "voltageswap",
+    "optifusedex",
     "core",
     "v3"
   ],
   "files": [
     "contracts/interfaces",
     "contracts/libraries",
-    "artifacts/contracts/VoltageV3Factory.sol/VoltageV3Factory.json",
-    "artifacts/contracts/VoltageV3Pool.sol/VoltageV3Pool.json",
+    "artifacts/contracts/OptiFuseV3Factory.sol/OptiFuseV3Factory.json",
+    "artifacts/contracts/OptiFuseV3Pool.sol/OptiFuseV3Pool.json",
     "artifacts/contracts/interfaces/**/*.json",
     "!artifacts/contracts/interfaces/**/*.dbg.json"
   ],
@@ -23,8 +23,8 @@
     "node": ">=10"
   },
   "devDependencies": {
-    "@voltageswap/common": "*",
-    "@voltageswap/v3-lm-pool": "*",
+    "@optifusedex/common": "*",
+    "@optifusedex/v3-lm-pool": "*",
     "@nomiclabs/hardhat-ethers": "^2.0.2",
     "@nomiclabs/hardhat-etherscan": "^2.1.8",
     "@nomiclabs/hardhat-waffle": "^2.0.1",

@@ -5,14 +5,14 @@ import { ethers, upgrades } from "hardhat";
 import { time, mineUpTo, reset } from "@nomicfoundation/hardhat-network-helpers";
 import { TickMath } from "@uniswap/v3-sdk";
 
-import VoltageV3PoolDeployerArtifact from "@voltageswap/v3-core/artifacts/contracts/VoltageV3PoolDeployer.sol/VoltageV3PoolDeployer.json";
-import VoltageV3FactoryArtifact from "@voltageswap/v3-core/artifacts/contracts/VoltageV3Factory.sol/VoltageV3Factory.json";
-// import VoltageV3FactoryOwnerArtifact from "@voltageswap/v3-core/artifacts/contracts/VoltageV3FactoryOwner.sol/VoltageV3FactoryOwner.json";
-import VoltageV3SwapRouterArtifact from "@voltageswap/v3-periphery/artifacts/contracts/SwapRouter.sol/SwapRouter.json";
-import NftDescriptorOffchainArtifact from "@voltageswap/v3-periphery/artifacts/contracts/NonfungibleTokenPositionDescriptorOffChain.sol/NonfungibleTokenPositionDescriptorOffChain.json";
-import NonfungiblePositionManagerArtifact from "@voltageswap/v3-periphery/artifacts/contracts/NonfungiblePositionManager.sol/NonfungiblePositionManager.json";
-import VoltageV3LmPoolDeployerArtifact from "@voltageswap/v3-lm-pool/artifacts/contracts/VoltageV3LmPoolDeployer.sol/VoltageV3LmPoolDeployer.json";
-import TestLiquidityAmountsArtifact from "@voltageswap/v3-periphery/artifacts/contracts/test/LiquidityAmountsTest.sol/LiquidityAmountsTest.json";
+import OptiFuseV3PoolDeployerArtifact from "@optifusedex/v3-core/artifacts/contracts/OptiFuseV3PoolDeployer.sol/OptiFuseV3PoolDeployer.json";
+import OptiFuseV3FactoryArtifact from "@optifusedex/v3-core/artifacts/contracts/OptiFuseV3Factory.sol/OptiFuseV3Factory.json";
+// import OptiFuseV3FactoryOwnerArtifact from "@optifusedex/v3-core/artifacts/contracts/OptiFuseV3FactoryOwner.sol/OptiFuseV3FactoryOwner.json";
+import OptiFuseV3SwapRouterArtifact from "@optifusedex/v3-periphery/artifacts/contracts/SwapRouter.sol/SwapRouter.json";
+import NftDescriptorOffchainArtifact from "@optifusedex/v3-periphery/artifacts/contracts/NonfungibleTokenPositionDescriptorOffChain.sol/NonfungibleTokenPositionDescriptorOffChain.json";
+import NonfungiblePositionManagerArtifact from "@optifusedex/v3-periphery/artifacts/contracts/NonfungiblePositionManager.sol/NonfungiblePositionManager.json";
+import OptiFuseV3LmPoolDeployerArtifact from "@optifusedex/v3-lm-pool/artifacts/contracts/OptiFuseV3LmPoolDeployer.sol/OptiFuseV3LmPoolDeployer.json";
+import TestLiquidityAmountsArtifact from "@optifusedex/v3-periphery/artifacts/contracts/test/LiquidityAmountsTest.sol/LiquidityAmountsTest.json";
 
 import ERC20MockArtifact from "./ERC20Mock.json";
 import CakeTokenArtifact from "./CakeToken.json";
@@ -37,18 +37,18 @@ describe("MasterChefV3", function () {
     reset();
 
     // Deploy factory
-    const VoltageV3PoolDeployer = await ethers.getContractFactoryFromArtifact(VoltageV3PoolDeployerArtifact);
-    const voltageV3PoolDeployer = await VoltageV3PoolDeployer.deploy();
+    const OptiFuseV3PoolDeployer = await ethers.getContractFactoryFromArtifact(OptiFuseV3PoolDeployerArtifact);
+    const optiFuseV3PoolDeployer = await OptiFuseV3PoolDeployer.deploy();
 
-    const VoltageV3Factory = await ethers.getContractFactoryFromArtifact(VoltageV3FactoryArtifact);
-    const voltageV3Factory = await VoltageV3Factory.deploy(voltageV3PoolDeployer.address);
+    const OptiFuseV3Factory = await ethers.getContractFactoryFromArtifact(OptiFuseV3FactoryArtifact);
+    const optiFuseV3Factory = await OptiFuseV3Factory.deploy(optiFuseV3PoolDeployer.address);
 
-    await voltageV3PoolDeployer.setFactoryAddress(voltageV3Factory.address);
+    await optiFuseV3PoolDeployer.setFactoryAddress(optiFuseV3Factory.address);
 
-    const VoltageV3SwapRouter = await ethers.getContractFactoryFromArtifact(VoltageV3SwapRouterArtifact);
-    const voltageV3SwapRouter = await VoltageV3SwapRouter.deploy(
-      voltageV3PoolDeployer.address,
-      voltageV3Factory.address,
+    const OptiFuseV3SwapRouter = await ethers.getContractFactoryFromArtifact(OptiFuseV3SwapRouterArtifact);
+    const optiFuseV3SwapRouter = await OptiFuseV3SwapRouter.deploy(
+      optiFuseV3PoolDeployer.address,
+      optiFuseV3Factory.address,
       WETH9Address
     );
 
@@ -56,19 +56,19 @@ describe("MasterChefV3", function () {
    /*  const NonfungibleTokenPositionDescriptor = await ethers.getContractFactoryFromArtifact(
       NftDescriptorOffchainArtifact
     );
-    const baseTokenUri = "https://nft.voltageswap.com/v3/";
+    const baseTokenUri = "https://nft.optifusedex.com/v3/";
     const nonfungibleTokenPositionDescriptor = await upgrades.deployProxy(NonfungibleTokenPositionDescriptor, [
       baseTokenUri,
     ]);
     await nonfungibleTokenPositionDescriptor.deployed(); */
     // TODO:
-    await VoltageV3SwapRouter.deploy(voltageV3PoolDeployer.address, voltageV3Factory.address, WETH9Address);
+    await OptiFuseV3SwapRouter.deploy(optiFuseV3PoolDeployer.address, optiFuseV3Factory.address, WETH9Address);
 
     // Deploy NFT position manager
     const NonfungiblePositionManager = await ethers.getContractFactoryFromArtifact(NonfungiblePositionManagerArtifact);
     const nonfungiblePositionManager = await NonfungiblePositionManager.deploy(
-      voltageV3PoolDeployer.address,
-      voltageV3Factory.address,
+      optiFuseV3PoolDeployer.address,
+      optiFuseV3Factory.address,
       WETH9Address,
       // nonfungibleTokenPositionDescriptor.address,
       ethers.constants.AddressZero
@@ -77,9 +77,9 @@ describe("MasterChefV3", function () {
     const ERC20Mock = await ethers.getContractFactoryFromArtifact(ERC20MockArtifact);
 
     // Deploy factory owner contract
-    // const VoltageV3FactoryOwner = await ethers.getContractFactoryFromArtifact(VoltageV3FactoryOwnerArtifact);
-    // const voltageV3FactoryOwner = await VoltageV3FactoryOwner.deploy(voltageV3Factory.address);
-    // await voltageV3Factory.setOwner(voltageV3FactoryOwner.address);
+    // const OptiFuseV3FactoryOwner = await ethers.getContractFactoryFromArtifact(OptiFuseV3FactoryOwnerArtifact);
+    // const optiFuseV3FactoryOwner = await OptiFuseV3FactoryOwner.deploy(optiFuseV3Factory.address);
+    // await optiFuseV3Factory.setOwner(optiFuseV3FactoryOwner.address);
 
     // Prepare for master chef v3
     const CakeToken = await ethers.getContractFactoryFromArtifact(CakeTokenArtifact);
@@ -131,14 +131,14 @@ describe("MasterChefV3", function () {
     await masterChefV2.deposit(1, await dummyTokenV3.balanceOf(admin.address));
     const firstFarmingBlock = await time.latestBlock();
 
-    const VoltageV3LmPoolDeployer = await ethers.getContractFactoryFromArtifact(VoltageV3LmPoolDeployerArtifact);
-    const voltageV3LmPoolDeployer = await VoltageV3LmPoolDeployer.deploy(
+    const OptiFuseV3LmPoolDeployer = await ethers.getContractFactoryFromArtifact(OptiFuseV3LmPoolDeployerArtifact);
+    const optiFuseV3LmPoolDeployer = await OptiFuseV3LmPoolDeployer.deploy(
       masterChefV3.address
-     // voltageV3FactoryOwner.address
+     // optiFuseV3FactoryOwner.address
     );
-    // await voltageV3FactoryOwner.setLmPoolDeployer(voltageV3LmPoolDeployer.address);
-    await voltageV3Factory.setLmPoolDeployer(voltageV3LmPoolDeployer.address);
-    await masterChefV3.setLMPoolDeployer(voltageV3LmPoolDeployer.address);
+    // await optiFuseV3FactoryOwner.setLmPoolDeployer(optiFuseV3LmPoolDeployer.address);
+    await optiFuseV3Factory.setLmPoolDeployer(optiFuseV3LmPoolDeployer.address);
+    await masterChefV3.setLMPoolDeployer(optiFuseV3LmPoolDeployer.address);
 
     // Deploy mock ERC20 tokens
     const tokenA = await ERC20Mock.deploy("Token A", "A");
@@ -159,10 +159,10 @@ describe("MasterChefV3", function () {
     await tokenD.mint(user1.address, ethers.utils.parseUnits("1000"));
     await tokenD.mint(user2.address, ethers.utils.parseUnits("1000"));
 
-    await tokenA.connect(admin).approve(voltageV3SwapRouter.address, ethers.constants.MaxUint256);
-    await tokenB.connect(admin).approve(voltageV3SwapRouter.address, ethers.constants.MaxUint256);
-    await tokenC.connect(admin).approve(voltageV3SwapRouter.address, ethers.constants.MaxUint256);
-    await tokenD.connect(admin).approve(voltageV3SwapRouter.address, ethers.constants.MaxUint256);
+    await tokenA.connect(admin).approve(optiFuseV3SwapRouter.address, ethers.constants.MaxUint256);
+    await tokenB.connect(admin).approve(optiFuseV3SwapRouter.address, ethers.constants.MaxUint256);
+    await tokenC.connect(admin).approve(optiFuseV3SwapRouter.address, ethers.constants.MaxUint256);
+    await tokenD.connect(admin).approve(optiFuseV3SwapRouter.address, ethers.constants.MaxUint256);
 
     await tokenA.connect(user1).approve(nonfungiblePositionManager.address, ethers.constants.MaxUint256);
     await tokenB.connect(user1).approve(nonfungiblePositionManager.address, ethers.constants.MaxUint256);
@@ -231,7 +231,7 @@ describe("MasterChefV3", function () {
     this.poolAddresses = poolAddresses;
     this.cakeToken = cakeToken;
     this.liquidityAmounts = liquidityAmounts;
-    this.swapRouter = voltageV3SwapRouter;
+    this.swapRouter = optiFuseV3SwapRouter;
 
     await network.provider.send("evm_setAutomine", [false]);
   });

@@ -1,6 +1,6 @@
 {
-  "name": "@voltageswap/smart-router",
-  "description": "Voltage Smart Router",
+  "name": "@optifusedex/smart-router",
+  "description": "OptiFuse Smart Router",
   "version": "1.0.0",
   "license": "GPL-2.0-or-later",
   "publishConfig": {

@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 pragma solidity =0.7.6;
 
-import './interfaces/IVoltageV3PoolDeployer.sol';
+import './interfaces/IOptiFuseV3PoolDeployer.sol';
 
-import './VoltageV3Pool.sol';
+import './OptiFuseV3Pool.sol';
 
-contract VoltageV3PoolDeployer is IVoltageV3PoolDeployer {
+contract OptiFuseV3PoolDeployer is IOptiFuseV3PoolDeployer {
     struct Parameters {
         address factory;
         address token0;
@@ -14,7 +14,7 @@ contract VoltageV3PoolDeployer is IVoltageV3PoolDeployer {
         int24 tickSpacing;
     }
 
-    /// @inheritdoc IVoltageV3PoolDeployer
+    /// @inheritdoc IOptiFuseV3PoolDeployer
     Parameters public override parameters;
 
     address public factoryAddress;
@@ -37,7 +37,7 @@ contract VoltageV3PoolDeployer is IVoltageV3PoolDeployer {
 
     /// @dev Deploys a pool with the given parameters by transiently setting the parameters storage slot and then
     /// clearing it after deploying the pool.
-    /// @param factory The contract address of the VoltageSwap V3 factory
+    /// @param factory The contract address of the OptiFuseDEX  V3 factory
     /// @param token0 The first token of the pool by address sort order
     /// @param token1 The second token of the pool by address sort order
     /// @param fee The fee collected upon every swap in the pool, denominated in hundredths of a bip
@@ -50,7 +50,7 @@ contract VoltageV3PoolDeployer is IVoltageV3PoolDeployer {
         int24 tickSpacing
     ) external override onlyFactory returns (address pool) {
         parameters = Parameters({factory: factory, token0: token0, token1: token1, fee: fee, tickSpacing: tickSpacing});
-        pool = address(new VoltageV3Pool{salt: keccak256(abi.encode(token0, token1, fee))}());
+        pool = address(new OptiFuseV3Pool{salt: keccak256(abi.encode(token0, token1, fee))}());
         delete parameters;
     }
 }

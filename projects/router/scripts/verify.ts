@@ -1,6 +1,6 @@
-import { verifyContract } from '@voltageswap/common/verify'
-import { sleep } from '@voltageswap/common/sleep'
-import { configs } from '@voltageswap/common/config'
+import { verifyContract } from '@optifusedex/common/verify'
+import { sleep } from '@optifusedex/common/sleep'
+import { configs } from '@optifusedex/common/config'
 
 async function main() {
   const networkName = network.name
@@ -22,8 +22,8 @@ async function main() {
   console.log('Verify swapRouter')
   await verifyContract(deployedContracts_smart_router.SmartRouter, [
     config.v2Factory,
-    deployedContracts_v3_core.VoltageV3PoolDeployer,
-    deployedContracts_v3_core.VoltageV3Factory,
+    deployedContracts_v3_core.OptiFuseV3PoolDeployer,
+    deployedContracts_v3_core.OptiFuseV3Factory,
     deployedContracts_v3_periphery.NonfungiblePositionManager,
     config.stableFactory,
     config.stableInfo,
@@ -34,8 +34,8 @@ async function main() {
   // Verify mixedRouteQuoterV1
   console.log('Verify mixedRouteQuoterV1')
   await verifyContract(deployedContracts_smart_router.MixedRouteQuoterV1, [
-    deployedContracts_v3_core.VoltageV3PoolDeployer,
-    deployedContracts_v3_core.VoltageV3Factory,
+    deployedContracts_v3_core.OptiFuseV3PoolDeployer,
+    deployedContracts_v3_core.OptiFuseV3Factory,
     config.v2Factory,
     config.stableFactory,
     config.WNATIVE,
@@ -45,8 +45,8 @@ async function main() {
   // Verify quoterV2
   console.log('Verify quoterV2')
   await verifyContract(deployedContracts_smart_router.QuoterV2, [
-    deployedContracts_v3_core.VoltageV3PoolDeployer,
-    deployedContracts_v3_core.VoltageV3Factory,
+    deployedContracts_v3_core.OptiFuseV3PoolDeployer,
+    deployedContracts_v3_core.OptiFuseV3Factory,
     config.WNATIVE,
   ])
   await sleep(10000)

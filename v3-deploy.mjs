@@ -1,5 +1,5 @@
 #!/usr/bin/env zx
-// import 'zx/globals'
+import 'zx/globals'
 
 const networks = {
   eth: 'eth',
@@ -17,15 +17,15 @@ if (!network || !networks[network]) {
   throw new Error(`env NETWORK: ${network}`)
 }
 
-await $`yarn workspace @voltageswap/v3-core run hardhat run scripts/deploy.ts --network ${network}`
+await $`yarn workspace @optifusedex/v3-core run hardhat run scripts/deploy.ts --network ${network}`
 
-await $`yarn workspace @voltageswap/v3-periphery run hardhat run scripts/deploy2.ts --network ${network}`
+await $`yarn workspace @optifusedex/v3-periphery run hardhat run scripts/deploy2.ts --network ${network}`
 
-await $`yarn workspace @voltageswap/smart-router run hardhat run scripts/deploy2.ts --network ${network}`
+await $`yarn workspace @optifusedex/smart-router run hardhat run scripts/deploy2.ts --network ${network}`
 
-await $`yarn workspace @voltageswap/masterchef-v3 run hardhat run scripts/deploy2.ts --network ${network}`
+await $`yarn workspace @optifusedex/masterchef-v3 run hardhat run scripts/deploy2.ts --network ${network}`
 
-await $`yarn workspace @voltageswap/v3-lm-pool run hardhat run scripts/deploy2.ts --network ${network}`
+await $`yarn workspace @optifusedex/v3-lm-pool run hardhat run scripts/deploy2.ts --network ${network}`
 
 console.log(chalk.blue('Done!'))
 

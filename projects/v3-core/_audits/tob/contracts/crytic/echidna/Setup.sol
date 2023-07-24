@@ -2,13 +2,13 @@ pragma solidity =0.7.6;
 pragma abicoder v2;
 
 import '../../../../../contracts/test/TestERC20.sol';
-import '../../../../../contracts/VoltageV3Pool.sol';
-import '../../../../../contracts/VoltagesV3Factory.sol';
+import '../../../../../contracts/OptiFuseV3Pool.sol';
+import '../../../../../contracts/OptiFuseV3Factory.sol';
 
 contract SetupToken {
     TestERC20 public token;
 
-    constructor() public {
+    constructor() {
         // this contract will receive the total supply of 100 tokens
         token = new TestERC20(1e12 ether);
     }
@@ -25,7 +25,7 @@ contract SetupTokens {
     TestERC20 public token0;
     TestERC20 public token1;
 
-    constructor() public {
+    constructor()  {
         // create the token wrappers
         tokenSetup0 = new SetupToken();
         tokenSetup1 = new SetupToken();
@@ -54,7 +54,7 @@ contract SetupTokens {
 }
 
 contract SetupUniswap {
-    VoltageV3Pool public pool;
+    OptiFuseV3Pool public pool;
     TestERC20 token0;
     TestERC20 token1;
 
@@ -62,22 +62,22 @@ contract SetupUniswap {
     // fee 500   + tickSpacing 10
     // fee 3000  + tickSpacing 60
     // fee 10000 + tickSpacing 200
-    VoltagesV3Factory factory;
+    OptiFuseV3Factory factory;
 
-    constructor(TestERC20 _token0, TestERC20 _token1) public {
-        factory = new VoltagesV3Factory();
+    constructor(TestERC20 _token0, TestERC20 _token1) {
+        factory = new OptiFuseV3Factory();
         token0 = _token0;
         token1 = _token1;
     }
 
     function createPool(uint24 _fee, uint160 _startPrice) public {
-        pool = VoltageV3Pool(factory.createPool(address(token0), address(token1), _fee));
+        pool = OptiFuseV3Pool(factory.createPool(address(token0), address(token1), _fee));
         pool.initialize(_startPrice);
     }
 }
 
 contract UniswapMinter {
-    VoltageV3Pool pool;
+    OptiFuseV3Pool pool;
     TestERC20 token0;
     TestERC20 token1;
 
@@ -94,11 +94,11 @@ contract UniswapMinter {
         token1 = _token1;
     }
 
-    function setPool(VoltageV3Pool _pool) public {
+    function setPool(OptiFuseV3Pool _pool) public {
         pool = _pool;
     }
 
-    function VoltageV3MintCallback(
+    function OptiFuseV3MintCallback(
         uint256 amount0Owed,
         uint256 amount1Owed,
         bytes calldata data
@@ -149,7 +149,7 @@ contract UniswapMinter {
 }
 
 contract UniswapSwapper {
-    VoltageV3Pool pool;
+    OptiFuseV3Pool pool;
     TestERC20 token0;
     TestERC20 token1;
 
@@ -167,11 +167,11 @@ contract UniswapSwapper {
         token1 = _token1;
     }
 
-    function setPool(VoltageV3Pool _pool) public {
+    function setPool(OptiFuseV3Pool _pool) public {
         pool = _pool;
     }
 
-    function VoltageV3SwapCallback(
+    function OptiFuseV3SwapCallback(
         int256 amount0Delta,
         int256 amount1Delta,
         bytes calldata data

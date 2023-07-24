@@ -1,6 +1,6 @@
-import { verifyContract } from '@voltageswap/common/verify'
-import { sleep } from '@voltageswap/common/sleep'
-import { configs } from '@voltageswap/common/config'
+import { verifyContract } from '@optifusedex/common/verify'
+import { sleep } from '@optifusedex/common/sleep'
+import { configs } from '@optifusedex/common/config'
 
 async function main() {
   const networkName = network.name
@@ -12,9 +12,9 @@ async function main() {
   const deployedContracts_masterchef_v3 = await import(`./masterchef-v3/deployments/${networkName}.json`)
   const deployedContracts_v3_lm_pool = await import(`./v3-lm-pool/deployments/${networkName}.json`)
 
-  // Verify voltageV3LmPoolDeployer
-  console.log('Verify voltageV3LmPoolDeployer')
-  await verifyContract(deployedContracts_v3_lm_pool.VoltageV3LmPoolDeployer, [
+  // Verify optiFuseV3LmPoolDeployer
+  console.log('Verify optiFuseV3LmPoolDeployer')
+  await verifyContract(deployedContracts_v3_lm_pool.OptiFuseV3LmPoolDeployer, [
     deployedContracts_masterchef_v3.MasterChefV3,
   ])
   await sleep(10000)

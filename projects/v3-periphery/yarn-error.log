@@ -1,5 +1,5 @@
 Arguments: 
-  /home/dadogg/.nvm/versions/node/v18.16.1/bin/node /mnt/c/Users/Utvikling/AppData/Roaming/npm/node_modules/yarn/bin/yarn.js add @voltageswap/v3-core/
+  /home/dadogg/.nvm/versions/node/v18.16.1/bin/node /mnt/c/Users/Utvikling/AppData/Roaming/npm/node_modules/yarn/bin/yarn.js add @optifusedex/v3-core/
 
 PATH: 
   /home/dadogg/.vscode-server/bin/660393deaaa6d1996740ff4880f1bad43768c814/bin/remote-cli:/home/dadogg/.local/bin:/home/dadogg/.nvm/versions/node/v18.16.1/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/Git/cmd:/mnt/c/Users/Utvikling/AppData/Roaming/nvm:/mnt/c/Program Files/nodejs:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/Users/Utvikling/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/Utvikling/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/Utvikling/AppData/Roaming/npm:/mnt/c/Users/Utvikling/AppData/Roaming/nvm:/mnt/c/Program Files/nodejs:/mnt/c/Program Files/JetBrains/PyCharm 2023.1.3/bin:/snap/bin
@@ -14,7 +14,7 @@ Platform:
   linux x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@voltageswap%2fv3-core/: Not found
+  Error: https://registry.yarnpkg.com/@optifusedex%2fv3-core/: Not found
       at params.callback [as _callback] (/mnt/c/Users/Utvikling/AppData/Roaming/npm/node_modules/yarn/lib/cli.js:66145:18)
       at self.callback (/mnt/c/Users/Utvikling/AppData/Roaming/npm/node_modules/yarn/lib/cli.js:140890:22)
       at Request.emit (node:events:513:28)
@@ -28,15 +28,15 @@ Trace:
 
 npm manifest: 
   {
-    "name": "@voltageswap/v3-periphery",
-    "description": "🎚 Peripheral smart contracts for interacting with VoltageSwap V3",
+    "name": "@optifusedex/v3-periphery",
+    "description": "🎚 Peripheral smart contracts for interacting with OptiFuseDEX  V3",
     "license": "GPL-2.0-or-later",
     "publishConfig": {
       "access": "public"
     },
     "version": "1.0.2",
     "keywords": [
-      "voltageswap",
+      "optifusedex",
       "periphery",
       "v3"
     ],
@@ -71,7 +71,7 @@ npm manifest:
       "@typechain/hardhat": "^8.0.0",
       "@types/chai": "^4.2.6",
       "@types/mocha": "^5.2.7",
-      "@voltageswap/v3-core": "*",
+      "@optifusedex/v3-core": "*",
       "chai": "^4.3.7",
       "decimal.js": "^10.2.1",
       "ethereum-waffle": "^3.0.2",

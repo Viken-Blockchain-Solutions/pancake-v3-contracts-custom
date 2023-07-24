@@ -1,6 +1,6 @@
-import { verifyContract } from '@voltageswap/common/verify'
-import { sleep } from '@voltageswap/common/sleep'
-import { configs } from '@voltageswap/common/config'
+import { verifyContract } from '@optifusedex/common/verify'
+import { sleep } from '@optifusedex/common/sleep'
+import { configs } from '@optifusedex/common/config'
 
 async function main() {
   const networkName = network.name
@@ -9,14 +9,14 @@ async function main() {
   if (!config) {
     throw new Error(`No config found for network ${networkName}`)
   }
-  const deployedContracts_v3_core = await import(`@voltageswap/v3-core/deployments/${networkName}.json`)
-  const deployedContracts_v3_periphery = await import(`@voltageswap/v3-periphery/deployments/${networkName}.json`)
+  const deployedContracts_v3_core = await import(`@optifusedex/v3-core/deployments/${networkName}.json`)
+  const deployedContracts_v3_periphery = await import(`@optifusedex/v3-periphery/deployments/${networkName}.json`)
 
   // Verify swapRouter
   console.log('Verify swapRouter')
   await verifyContract(deployedContracts_v3_periphery.SwapRouter, [
-    deployedContracts_v3_core.VoltageV3PoolDeployer,
-    deployedContracts_v3_core.VoltageV3Factory,
+    deployedContracts_v3_core.OptiFuseV3PoolDeployer,
+    deployedContracts_v3_core.OptiFuseV3Factory,
     config.WNATIVE,
   ])
   await sleep(10000)
@@ -29,23 +29,23 @@ async function main() {
   // Verify NonfungiblePositionManager
   console.log('Verify NonfungiblePositionManager')
   await verifyContract(deployedContracts_v3_periphery.NonfungiblePositionManager, [
-    deployedContracts_v3_core.VoltageV3PoolDeployer,
-    deployedContracts_v3_core.VoltageV3Factory,
+    deployedContracts_v3_core.OptiFuseV3PoolDeployer,
+    deployedContracts_v3_core.OptiFuseV3Factory,
     config.WNATIVE,
     deployedContracts_v3_periphery.NonfungibleTokenPositionDescriptor,
   ])
   await sleep(10000)
 
-  // Verify VoltageInterfaceMulticall
-  console.log('Verify VoltageInterfaceMulticall')
-  await verifyContract(deployedContracts_v3_periphery.VoltageInterfaceMulticall)
+  // Verify OptiFuseInterfaceMulticall
+  console.log('Verify OptiFuseInterfaceMulticall')
+  await verifyContract(deployedContracts_v3_periphery.OptiFuseInterfaceMulticall)
   await sleep(10000)
 
   // Verify v3Migrator
   console.log('Verify v3Migrator')
   await verifyContract(deployedContracts_v3_periphery.V3Migrator, [
-    deployedContracts_v3_core.VoltageV3PoolDeployer,
-    deployedContracts_v3_core.VoltageV3Factory,
+    deployedContracts_v3_core.OptiFuseV3PoolDeployer,
+    deployedContracts_v3_core.OptiFuseV3Factory,
     config.WNATIVE,
     deployedContracts_v3_periphery.NonfungiblePositionManager,
   ])
@@ -59,8 +59,8 @@ async function main() {
   // Verify QuoterV2
   console.log('Verify QuoterV2')
   await verifyContract(deployedContracts_v3_periphery.QuoterV2, [
-    deployedContracts_v3_core.VoltageV3PoolDeployer,
-    deployedContracts_v3_core.VoltageV3Factory,
+    deployedContracts_v3_core.OptiFuseV3PoolDeployer,
+    deployedContracts_v3_core.OptiFuseV3Factory,
     config.WNATIVE,
   ])
   await sleep(10000)

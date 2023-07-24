@@ -1,14 +1,14 @@
 {
-  "name": "@voltageswap/masterchef-v3",
+  "name": "@optifusedex/masterchef-v3",
   "version": "1.0.0",
-  "description": "Voltage MasterChef V3",
+  "description": "OptiFuse MasterChef V3",
   "publishConfig": {
     "access": "public"
   },
-  "author": "VoltageSwap",
+  "author": "OptiFuseDEX ",
   "license": "MIT",
   "keywords": [
-    "voltageswap",
+    "optifusedex",
     "masterchef",
     "v3"
   ],
@@ -38,9 +38,9 @@
     "@openzeppelin/test-helpers": "^0.5.11",
     "@pancakeswap/eslint-config-pancake": "^1.2.0",
     "@pancakeswap/pancake-swap-lib": "0.0.4",
-    "@voltageswap/v3-core": "*",
-    "@voltageswap/v3-lm-pool": "*",
-    "@voltageswap/v3-periphery": "*",
+    "@optifusedex/v3-core": "*",
+    "@optifusedex/v3-lm-pool": "*",
+    "@optifusedex/v3-periphery": "*",
     "@types/chai": "^4.2.21",
     "@types/mocha": "^8.2.2",
     "@types/node": "^14.14.35",

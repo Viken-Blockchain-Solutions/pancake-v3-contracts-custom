@@ -1,8 +1,8 @@
 import { Wallet } from 'ethers'
 import { ethers, waffle } from 'hardhat'
 import { TestERC20 } from '../typechain-types/contracts/test/TestERC20'
-import { VoltageV3Factory } from '../typechain-types/contracts/VoltageV3Factory'
-import { MockTimeVoltageV3Pool } from '../typechain-types/contracts/test/MockTimeVoltageV3Pool'
+import { OptiFuseV3Factory } from '../typechain-types/contracts/OptiFuseV3Factory'
+import { MockTimeOptiFuseV3Pool } from '../typechain-types/contracts/test/MockTimeOptiFuseV3Pool'
 import { expect } from './shared/expect'
 
 import { poolFixture } from './shared/fixtures'
@@ -18,8 +18,8 @@ import {
   getMaxTick,
   expandTo18Decimals,
 } from './shared/utilities'
-import { TestVoltageV3Router } from '../typechain-types/contracts/test/TestVoltageV3Router'
-import { TestVoltageV3Callee } from '../typechain-types/contracts/test/TestVoltageV3Callee'
+import { TestOptiFuseV3Router } from '../typechain-types/contracts/test/TestOptiFuseV3Router'
+import { TestOptiFuseV3Callee } from '../typechain-types/contracts/test/TestOptiFuseV3Callee'
 
 const feeAmount = FeeAmount.MEDIUM
 const tickSpacing = TICK_SPACINGS[feeAmount]
@@ -28,15 +28,15 @@ const createFixtureLoader = waffle.createFixtureLoader
 
 type ThenArg<T> = T extends PromiseLike<infer U> ? U : T
 
-describe('VoltageV3Pool', () => {
+describe('OptiFuseV3Pool', () => {
   let wallet: Wallet, other: Wallet
 
   let token0: TestERC20
   let token1: TestERC20
   let token2: TestERC20
-  let factory: VoltageV3Factory
-  let pool0: MockTimeVoltageV3Pool
-  let pool1: MockTimeVoltageV3Pool
+  let factory: OptiFuseV3Factory
+  let pool0: MockTimeOptiFuseV3Pool
+  let pool1: MockTimeOptiFuseV3Pool
 
   let pool0Functions: PoolFunctions
   let pool1Functions: PoolFunctions
@@ -44,8 +44,8 @@ describe('VoltageV3Pool', () => {
   let minTick: number
   let maxTick: number
 
-  let swapTargetCallee: TestVoltageV3Callee
-  let swapTargetRouter: TestVoltageV3Router
+  let swapTargetCallee: TestOptiFuseV3Callee
+  let swapTargetRouter: TestOptiFuseV3Router
 
   let loadFixture: ReturnType<typeof createFixtureLoader>
   let createPool: ThenArg<ReturnType<typeof poolFixture>>['createPool']
@@ -66,7 +66,7 @@ describe('VoltageV3Pool', () => {
       spacing: number,
       firstToken: TestERC20,
       secondToken: TestERC20
-    ): Promise<[MockTimeVoltageV3Pool, any]> => {
+    ): Promise<[MockTimeOptiFuseV3Pool, any]> => {
       const pool = await createPool(amount, spacing, firstToken, secondToken)
       const poolFunctions = createPoolFunctions({
         swapTarget: swapTargetCallee,

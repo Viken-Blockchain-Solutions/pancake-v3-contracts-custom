@@ -1,7 +1,7 @@
 {
   "_format": "hh-sol-artifact-1",
-  "contractName": "VoltageV3PoolDeployer",
-  "sourceName": "contracts/VoltageV3PoolDeployer.sol",
+  "contractName": "OptiFuseV3PoolDeployer",
+  "sourceName": "contracts/OptiFuseV3PoolDeployer.sol",
   "abi": [
     {
       "inputs": [

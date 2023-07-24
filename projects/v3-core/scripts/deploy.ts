@@ -1,4 +1,4 @@
-import { tryVerify } from '@voltageswap/common/verify'
+import { tryVerify } from '@optifusedex/common/verify'
 import { ContractFactory } from 'ethers'
 import { ethers, network } from 'hardhat'
 import fs from 'fs'
@@ -6,9 +6,9 @@ import fs from 'fs'
 type ContractJson = { abi: any; bytecode: string }
 const artifacts: { [name: string]: ContractJson } = {
   // eslint-disable-next-line global-require
-  VoltageV3PoolDeployer: require('../artifacts/contracts/VoltageV3PoolDeployer.sol/VoltageV3PoolDeployer.json'),
+  OptiFuseV3PoolDeployer: require('../artifacts/contracts/OptiFuseV3PoolDeployer.sol/OptiFuseV3PoolDeployer.json'),
   // eslint-disable-next-line global-require
-  VoltageV3Factory: require('../artifacts/contracts/VoltageV3Factory.sol/VoltageV3Factory.json'),
+  OptiFuseV3Factory: require('../artifacts/contracts/OptiFuseV3Factory.sol/OptiFuseV3Factory.json'),
 }
 
 async function main() {
@@ -16,49 +16,49 @@ async function main() {
   const networkName = network.name
   console.log('owner', owner.address)
 
-  let voltageV3PoolDeployer_address = ''
-  let voltageV3PoolDeployer
-  const VoltageV3PoolDeployer = new ContractFactory(
-    artifacts.VoltageV3PoolDeployer.abi,
-    artifacts.VoltageV3PoolDeployer.bytecode,
+  let optiFuseV3PoolDeployer_address = ''
+  let optiFuseV3PoolDeployer
+  const OptiFuseV3PoolDeployer = new ContractFactory(
+    artifacts.OptiFuseV3PoolDeployer.abi,
+    artifacts.OptiFuseV3PoolDeployer.bytecode,
     owner
   )
-  if (!voltageV3PoolDeployer_address) {
-    voltageV3PoolDeployer = await VoltageV3PoolDeployer.deploy()
+  if (!optiFuseV3PoolDeployer_address) {
+    optiFuseV3PoolDeployer = await OptiFuseV3PoolDeployer.deploy()
 
-    voltageV3PoolDeployer_address = voltageV3PoolDeployer.address
-    console.log('voltageV3PoolDeployer', voltageV3PoolDeployer_address)
+    optiFuseV3PoolDeployer_address = optiFuseV3PoolDeployer.address
+    console.log('optiFuseV3PoolDeployer', optiFuseV3PoolDeployer_address)
   } else {
-    voltageV3PoolDeployer = new ethers.Contract(
-      voltageV3PoolDeployer_address,
-      artifacts.VoltageV3PoolDeployer.abi,
+    optiFuseV3PoolDeployer = new ethers.Contract(
+      optiFuseV3PoolDeployer_address,
+      artifacts.OptiFuseV3PoolDeployer.abi,
       owner
     )
   }
 
-  let voltageV3Factory_address = ''
-  let voltageV3Factory
-  if (!voltageV3Factory_address) {
-    const VoltageV3Factory = new ContractFactory(
-      artifacts.VoltageV3Factory.abi,
-      artifacts.VoltageV3Factory.bytecode,
+  let optiFuseV3Factory_address = ''
+  let optiFuseV3Factory
+  if (!optiFuseV3Factory_address) {
+    const OptiFuseV3Factory = new ContractFactory(
+      artifacts.OptiFuseV3Factory.abi,
+      artifacts.OptiFuseV3Factory.bytecode,
       owner
     )
-    voltageV3Factory = await VoltageV3Factory.deploy(voltageV3PoolDeployer_address)
+    optiFuseV3Factory = await OptiFuseV3Factory.deploy(optiFuseV3PoolDeployer_address)
 
-    voltageV3Factory_address = voltageV3Factory.address
-    console.log('voltageV3Factory', voltageV3Factory_address)
+    optiFuseV3Factory_address = optiFuseV3Factory.address
+    console.log('optiFuseV3Factory', optiFuseV3Factory_address)
   } else {
-    voltageV3Factory = new ethers.Contract(voltageV3Factory_address, artifacts.VoltageV3Factory.abi, owner)
+    optiFuseV3Factory = new ethers.Contract(optiFuseV3Factory_address, artifacts.OptiFuseV3Factory.abi, owner)
   }
 
-  // Set FactoryAddress for voltageV3PoolDeployer.
-  await voltageV3PoolDeployer.setFactoryAddress(voltageV3Factory_address);
+  // Set FactoryAddress for optiFuseV3PoolDeployer.
+  await optiFuseV3PoolDeployer.setFactoryAddress(optiFuseV3Factory_address);
 
 
   const contracts = {
-    VoltageV3Factory: voltageV3Factory_address,
-    VoltageV3PoolDeployer: voltageV3PoolDeployer_address,
+    OptiFuseV3Factory: optiFuseV3Factory_address,
+    OptiFuseV3PoolDeployer: optiFuseV3PoolDeployer_address,
   }
 
   fs.writeFileSync(`./deployments/${networkName}.json`, JSON.stringify(contracts, null, 2))

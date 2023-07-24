@@ -1,13 +1,13 @@
 {
-  "name": "@voltageswap/v3-periphery",
-  "description": "🎚 Peripheral smart contracts for interacting with VoltageSwap V3",
+  "name": "@optifusedex/v3-periphery",
+  "description": "🎚 Peripheral smart contracts for interacting with OptiFuseDEX  V3",
   "license": "GPL-2.0-or-later",
   "publishConfig": {
     "access": "public"
   },
   "version": "1.0.2",
   "keywords": [
-    "voltageswap",
+    "optifusedex",
     "periphery",
     "v3"
   ],
@@ -24,6 +24,7 @@
     "node": ">=10"
   },
   "dependencies": {
+
     "@openzeppelin/contracts": "3.4.2-solc-0.7",
     "@openzeppelin/contracts-upgradeable": "3.4.2-solc-0.7",
     "@uniswap/lib": "^4.0.1-alpha",
@@ -33,15 +34,15 @@
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.2",
     "@nomiclabs/hardhat-etherscan": "^3.1.7",
-    "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "@nomiclabs/hardhat-waffle": "^2.0.6",
     "@openzeppelin/hardhat-upgrades": "^1.22.1",
-    "@voltageswap/v3-core": "*",
     "@typechain/ethers-v5": "^10.2.0",
     "@types/chai": "^4.2.6",
     "@types/mocha": "^5.2.7",
+    "@optifusedex/v3-core": "*",
     "chai": "^4.2.0",
     "decimal.js": "^10.2.1",
-    "ethereum-waffle": "^3.0.2",
+    "ethereum-waffle": "^4.0.10",
     "ethers": "^5.0.8",
     "hardhat": "^2.6.8",
     "hardhat-typechain": "^0.3.5",

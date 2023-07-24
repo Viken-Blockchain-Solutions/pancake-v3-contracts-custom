@@ -2,10 +2,10 @@
 pragma solidity =0.7.6;
 pragma abicoder v2;
 
-import '@voltageswap/v3-core/contracts/libraries/SafeCast.sol';
-import '@voltageswap/v3-core/contracts/libraries/TickMath.sol';
-import '@voltageswap/v3-core/contracts/interfaces/IVoltageV3Pool.sol';
-import '@voltageswap/v3-core/contracts/interfaces/callback/IVoltageV3SwapCallback.sol';
+import '@optifusedex/v3-core/contracts/libraries/SafeCast.sol';
+import '@optifusedex/v3-core/contracts/libraries/TickMath.sol';
+import '@optifusedex/v3-core/contracts/interfaces/IOptiFuseV3Pool.sol';
+import '@optifusedex/v3-core/contracts/interfaces/callback/IOptiFuseV3SwapCallback.sol';
 
 import '../interfaces/IQuoter.sol';
 import '../base/PeripheryImmutableState.sol';
@@ -17,7 +17,7 @@ import '../libraries/CallbackValidation.sol';
 /// @notice Allows getting the expected amount out or amount in for a given swap without executing the swap
 /// @dev These functions are not gas efficient and should _not_ be called on chain. Instead, optimistically execute
 /// the swap and check the amounts in the callback.
-contract Quoter is IQuoter, IVoltageV3SwapCallback, PeripheryImmutableState {
+contract Quoter is IQuoter, IOptiFuseV3SwapCallback, PeripheryImmutableState {
     using Path for bytes;
     using SafeCast for uint256;
 
@@ -30,12 +30,12 @@ contract Quoter is IQuoter, IVoltageV3SwapCallback, PeripheryImmutableState {
         address tokenA,
         address tokenB,
         uint24 fee
-    ) private view returns (IVoltageV3Pool) {
-        return IVoltageV3Pool(PoolAddress.computeAddress(deployer, PoolAddress.getPoolKey(tokenA, tokenB, fee)));
+    ) private view returns (IOptiFuseV3Pool) {
+        return IOptiFuseV3Pool(PoolAddress.computeAddress(deployer, PoolAddress.getPoolKey(tokenA, tokenB, fee)));
     }
 
-    /// @inheritdoc IVoltageV3SwapCallback
-    function VoltageV3SwapCallback(
+    /// @inheritdoc IOptiFuseV3SwapCallback
+    function OptiFuseV3SwapCallback(
         int256 amount0Delta,
         int256 amount1Delta,
         bytes memory path
